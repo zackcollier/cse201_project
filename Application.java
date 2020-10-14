@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Application {
 
@@ -5,22 +6,31 @@ public class Application {
 	public String description;
 	public String organization;
 	public String platforms;
-	public String versions;
+	public String version;
 	public String genre;
-	public double averageRating;
-	private double[] allRatings;
-	public String[] comments;
+	public float averageRating;
+	private ArrayList<float> allRatings = new ArrayList<>();
+	public ArrayList<String> comments = new ArrayList<>();
 	
 	public Application (String appName,
 			String appDescription,
 			String appOrganization,
 			String appPlatforms,
-	        String appVersions,
-	        String appGenre,
-			double averageAppRating, 
-			double[] allAppRatings,
-			String[] appComments) {
+	      		String appVersion,
+	        	String appGenre) {
 		name = appName; 
+		description = appDescription;
+		organization = appOrganization;
+		platform = appPlatform;
+		version = appVersion;
+		genre = appGenre;
+	}
+	
+	public void calcAvgRating() {
+		float sum = 0;
+		for (float rating : allRatings) 
+			sum += rating;
+		averageRating = sum/allRatings.size();
 		
 	}
 }
