@@ -10,8 +10,9 @@ public class Developer extends User {
 		
 	}
 	
-	public void updateApp() {
-		
-		
+	public void updateApp(Application app) {
+		if (app.company.equals(company)) {
+			//code to allow developers to select an field to alter, alter it, or go back to the selection screen
+		}
 	}
 }

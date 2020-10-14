@@ -33,4 +33,8 @@ public class Application {
 		averageRating = sum/allRatings.size();
 		
 	}
+	
+	public String[] toArray() {
+		return new String[] {name, description, company, platforms, version, averageRating};
+	}
 }
