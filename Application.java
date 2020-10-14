@@ -4,7 +4,7 @@ public class Application {
 
 	public String name;
 	public String description;
-	public String organization;
+	public String company;
 	public String platforms;
 	public String version;
 	public String genre;
@@ -14,13 +14,13 @@ public class Application {
 	
 	public Application (String appName,
 			String appDescription,
-			String appOrganization,
+			String appCompany,
 			String appPlatforms,
 	      		String appVersion,
 	        	String appGenre) {
 		name = appName; 
 		description = appDescription;
-		organization = appOrganization;
+		company = appCompany;
 		platform = appPlatform;
 		version = appVersion;
 		genre = appGenre;
