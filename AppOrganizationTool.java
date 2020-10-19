@@ -17,7 +17,7 @@ public class AppOrganizationTool {
 		return requests;
 	}
 	
-	public ArrayList<Application> search(String str) {
+	public void search(String str) {
 		ArrayList<Application> searchApps = new ArrayList<>();
 		for (Application a : apps) {
 			for (String s : a.toArray()) {
@@ -27,7 +27,9 @@ public class AppOrganizationTool {
 				}
 			}
 		}
-		return searchApps;
+		for (Application app : searchApps) {
+			app.printDetails();
+		}
 	}
 	
     public static void main(String args[]) {
