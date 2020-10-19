@@ -9,7 +9,7 @@ public class Application {
 	public String version;
 	public String genre;
 	public float averageRating;
-	private ArrayList<float> allRatings = new ArrayList<>();
+	private ArrayList<Float> allRatings = new ArrayList<>();
 	public ArrayList<String> comments = new ArrayList<>();
 	
 	/**
@@ -52,7 +52,7 @@ public class Application {
 	 * @return An array containing all of the instance variables for the application.
 	 */
 	public String[] toArray() {
-		return new String[] {name, description, company, platforms, version, averageRating};
+		return new String[] {name, description, company, platforms, version, String.valueOf(averageRating)};
 	}
 	
 	/**
