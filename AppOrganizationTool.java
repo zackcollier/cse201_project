@@ -17,6 +17,18 @@ public class AppOrganizationTool {
 		return requests;
 	}
 	
+	public ArrayList<Application> search(String str) {
+		ArrayList<Application> searchApps = new ArrayList<>();
+		for (Application a : apps) {
+			for (int i = 0; i < a.toArray().size(); i++) {
+				if (a.toArray().get(i).contains(str)) {
+					searchApps.add(a);
+					break;
+				}
+			}
+		}
+	}
+	
     public static void main(String args[]) {
         Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "App 1 Platforms", "App 1 Version", "App 1 Genre");
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
