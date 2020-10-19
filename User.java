@@ -19,5 +19,21 @@ public class User {
 	public void comment(Application app, String userComment) {
 		app.comments.add(userComment);	
 	}
+	
+	public void search(AppOrganizationTool AOT, String str) {
+		ArrayList<Application> searchApps = new ArrayList<>();
+		for (Application a : AOT.apps) {
+			for (String s : a.toArray()) {
+				if (s.contains(str)) {
+					searchApps.add(a);
+					break;
+				}
+			}
+		}
+		System.out.println("Search Results for '" + str + "':");
+		for (Application app : searchApps) {
+			app.printDetails();
+		}
+	}
 
 }
