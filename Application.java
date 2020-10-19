@@ -54,4 +54,17 @@ public class Application {
 	public String[] toArray() {
 		return new String[] {name, description, company, platforms, version, averageRating};
 	}
+	
+	/**
+	 * 
+	 *  Prints all of the instance variables for the application.
+	 *  Will likely be changed to use graphics at a later date.
+	 */
+	public void printDetails() {
+		String[] details = this.toArray();
+		String print = "";
+		for (String s : details)
+			print += s + ", ";
+		System.out.println(print);
+	}
 }
