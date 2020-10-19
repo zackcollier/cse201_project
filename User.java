@@ -1,37 +1,28 @@
 
 public class User {
 
-		public String username;
-		private String password;
+	public String username;
+	private String password;
 		
-		public User() {
-			
-		}
+	public User() {}
 		
-		public User(String user,
-				    String pword) {
-			
-			username = user;
-			password = pword;
-			
-		}
+	public User(String user, String pword) {	
+		username = user;
+		password = pword;	
+	}
 
-		public boolean login(String username, String password) {
+	public boolean login(String username, String password) {
 			
-			return false;
-			
-		}
+		return false;	
+	}
 		
-		public void comment(String userComment) {
-			
-			
-			
-		}
+	public void comment(Application app, String userComment) {
+		app.comments.add(userComment);	
+	}
+	
+	public void submitRequest() {	
+	
 		
-		public void submitRequest() {
-			
-			
-			
-		}
-		
+	}
+	
 }
