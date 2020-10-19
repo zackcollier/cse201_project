@@ -61,10 +61,9 @@ public class Application {
 	 *  Will likely be changed to use graphics at a later date.
 	 */
 	public void printDetails() {
-		String[] details = this.toArray();
 		String print = "";
-		for (String s : details)
+		for (String s : this.toArray())
 			print += s + ", ";
-		System.out.println(print);
+		System.out.println(print.substring(0, print.length - 2));
 	}
 }
