@@ -20,7 +20,7 @@ public class Application {
 	 * @param appCompany The company that uploaded the application.
 	 * @param appPlatforms The platforms that the application is available on.
 	 * @param appVersion The current version of the application.
-	 * @param appGenre The genre that best describes the application
+	 * @param appGenre The genre that best describes the application.
 	 */
 	public Application (String appName,
 			String appDescription,
@@ -37,7 +37,7 @@ public class Application {
 	}
 	
 	/**
-	 * Describe function
+	 * Calculates the average rating for the app and changes the variable.
 	 */
 	public void calcAvgRating() {
 		float sum = 0;
