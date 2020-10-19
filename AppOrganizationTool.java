@@ -20,8 +20,8 @@ public class AppOrganizationTool {
 	public ArrayList<Application> search(String str) {
 		ArrayList<Application> searchApps = new ArrayList<>();
 		for (Application a : apps) {
-			for (int i = 0; i < a.toArray().size(); i++) {
-				if (a.toArray().get(i).contains(str)) {
+			for (int i = 0; i < a.toArray().length; i++) {
+				if (a.toArray()[i].contains(str)) {
 					searchApps.add(a);
 					break;
 				}
