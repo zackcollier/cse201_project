@@ -27,6 +27,7 @@ public class AppOrganizationTool {
 				}
 			}
 		}
+		System.out.println("Search Results for '" + str + "':");
 		for (Application app : searchApps) {
 			app.printDetails();
 		}
