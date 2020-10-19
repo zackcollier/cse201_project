@@ -27,6 +27,7 @@ public class AppOrganizationTool {
 				}
 			}
 		}
+		return searchApps;
 	}
 	
     public static void main(String args[]) {
