@@ -19,10 +19,5 @@ public class User {
 	public void comment(Application app, String userComment) {
 		app.comments.add(userComment);	
 	}
-	
-	public void submitRequest() {	
-	
-		
-	}
-	
+
 }
