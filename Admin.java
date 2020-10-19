@@ -1,7 +1,7 @@
 
-public class Admins extends Moderator {
+public class Admin extends Moderator {
 
-	public Admins(String user, String pword) {
+	public Admin(String user, String pword) {
 		super(user, pword);
 		
 	}
@@ -12,7 +12,7 @@ public class Admins extends Moderator {
 		
 	}
 	
-	public void approveRequest(AppOrganizationalTool tool, Application app) {
+	public void approveRequest(AppOrganizationTool tool, Application app) {
 		tool.apps.add(app);
 		
 	}
