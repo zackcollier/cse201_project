@@ -21,4 +21,13 @@ public class Developer extends User {
 			//code to allow developers to select an field to alter, alter it, or go back to the selection screen
 		}
 	}
+	/**
+	 * Sends an app to be requested to be approved by an admin
+	 * @param AOT Instance of AppOrganizationTool that the app will be sent to.
+	 * @param app The application to be sent.
+	 */
+	public void submitRequest(AppOrganizationTool AOT, Application app) {	
+		AOT.requests.add(app);
+	}
+	
 }
