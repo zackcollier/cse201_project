@@ -4,6 +4,6 @@
 Zack Collier, Craig Conner, Qi Feng, Brett Herman, Nathaniel Richardson
 
 ## Goals for Iteration 1
-- [ ] Search Apps
+- [x] Search Apps
 - [x] View Applications
-- [ ] Implement Basic Classes
+- [x] Implement Basic Classes
