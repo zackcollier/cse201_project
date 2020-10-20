@@ -15,10 +15,18 @@ public class Developer extends User {
 	/**
 	 * Updates an application that the developer has access to.
 	 * @param app The application data that should overwrite the previous data.
+	 * @param case The number of the case that the user will have inputted with a button press
+	 * @param update The updated text that needs to be applied
 	 */
-	public void updateApp(Application app) {
+	public void updateApp(Application app, int case, String update) {
 		if (app.company.equals(company)) {
-			//code to allow developers to select an field to alter, alter it, or go back to the selection screen
+			switch (case) {
+				case 1 : app.name = update;  break;
+				case 2 app.description = update;  break;
+				case 3 : app.company = update;  break;
+				case 4: app.platforms = update;  break;
+				case 5: app.version = update;  break;
+				case 6: app.genre = update;  break;
 		}
 	}
 	/**
