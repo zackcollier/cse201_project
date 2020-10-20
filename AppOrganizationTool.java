@@ -21,22 +21,6 @@ public class AppOrganizationTool {
 		return requests;
 	}
 	
-	public void search(String str) {
-		ArrayList<Application> searchApps = new ArrayList<>();
-		for (Application a : apps) {
-			for (String s : a.toArray()) {
-				if (s.contains(str)) {
-					searchApps.add(a);
-					break;
-				}
-			}
-		}
-		System.out.println("Search Results for '" + str + "':");
-		for (Application app : searchApps) {
-			app.printDetails();
-		}
-	}
-	
     public static void main(String args[]) {
         Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "App 1 Platforms", "App 1 Version", "App 1 Genre");
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
@@ -50,5 +34,6 @@ public class AppOrganizationTool {
         a1.approveRequest(AOT, AOT.getRequests().remove());
         AOT.getApps().get(0).printDetails();
         AOT.getApps().get(1).printDetails();
+	a1.search("1");
     }
 }
