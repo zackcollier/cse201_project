@@ -8,7 +8,7 @@ public class Admin extends Moderator {
 	
 	public void viewRequest(Application app) {
 		// shows the details of the app, for now this is similar
-		System.out.println(app.toArray().toString());
+		app.printDetails();
 		
 	}
 	
