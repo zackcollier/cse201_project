@@ -15,7 +15,6 @@ public class Application {
 	public ArrayList<String> comments = new ArrayList<>();
 	
 	private List<Answer> mAllAnswers;
-        private Filter<Tag> mFilter;
 	
 	/**
 	 * The basic class that contains information for applications
@@ -82,37 +81,6 @@ public class Application {
 		else return 0;
 	}
 	
-	/**
-	* return the arraylist that have been use the filter
-	* didn't finish yet, in the upcoming edition, the filter should use the getfilter to change sort the different array in the arraylist
-	*/
-	private List<Answer> findByTags(List<Tag> tags) {
-           List<Answer> answers = new ArrayList<>();
-
-           for (Answer answer : mAllAnswers) {
-              for (Tag tag : tags) {
-                  if (answer.hasTag(tag.getText()) && !answers.contains(answer)) {
-                      answers.add(answer);
-                   }
-               }
-           }
-           return questions;
-       }
-	
-	
-	/**
-	* return the tags in an arraylist, which will be use in the findByTags method to use the filter for the app arraylist
-	*/
-	
-	private Filter<Tag> getTags() {
-        Filter<Tag> mFilter = new ArrayList<>();
-		
-        for (int i = 0; i < name.length; ++i) {
-            tags.add(new Tag(name[i], description[i],company[i],platforms[i],version[i],averageRating[i]));
-        }
-		
-        return tags;
-    }
 	
 	
 	/**
