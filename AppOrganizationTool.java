@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 import java.util.Queue;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class AppOrganizationTool {
 
 	ArrayList<Application> apps = new ArrayList<>();
 	Queue<Application> requests = new LinkedBlockingQueue<>();
+	Map<String, String> users = new HashMap<>();
+	User currentUser;
 	
 	public AppOrganizationTool()  {}
     
