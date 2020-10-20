@@ -61,7 +61,7 @@ public class Application {
 	 *
 	// *didn't finish yet, these variables need change to arrays, which can help filter better, and this method change to return arraylist
 	 */
-	public String[][] toArray() {
+	public String[] toArray() {
 		//return new String[][] {name[], description[], company[], platforms[], version[], String.valueOf(averageRating)[]};
 		return new String[] {name, description, company, platforms, version, String.valueOf(averageRating)};
 	}
