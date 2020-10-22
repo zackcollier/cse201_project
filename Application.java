@@ -69,7 +69,7 @@ public class Application {
 	/**
 	*get the number of what part of the app information that the user is interested in, so we can use it to filter the search.
 	*/
-	public int getfilter(){
+	public int getfilter(String questionAnswer){
 	   String questiontext1 = "User please input the number of the information part of the app you interested to use the filter.";
 	   String questiontext2 = "number 1 is the name, 2 is the description, 3 is the company, 4 is the platforms, 5 is the version, 6 is the averagerating.";
 	   if (questionAnswer.equals("name")) return 1;
