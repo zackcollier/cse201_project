@@ -12,7 +12,7 @@ public class GraphicalInterface {
         // Display all apps with apps that do not have a specific 'thing' 
     }
   
-    public void void commentSection() {
+    public void commentSection() {
         // Display the comment section of the current app  
     }
 }
