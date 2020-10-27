@@ -38,8 +38,8 @@ public class Application {
 		description = appDescription;
 		company = appCompany;
 		platforms = appPlatforms;
-		questionAnswer = getQuestionAnswer;
-		answer = answer;
+		this.questionAnswer = getQuestionAnswer;
+		answer = questionAnswer;
 		version = appVersion;
 		genre = appGenre;
 	}
