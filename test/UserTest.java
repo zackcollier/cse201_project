@@ -14,7 +14,7 @@ public class UserTest {
     public void setUp() {
         // Creates an AOT
         AOT = new AppOrganizationTool();
-        APP = new Application(null, null, null, null, null, 0, null, null);
+        APP = new Application("App", "", "", "", "", 0, "", "");
     }
 
     @Test
@@ -64,23 +64,34 @@ public class UserTest {
 
     @Test
     public void testComment() {
-    // Create User
-    User user5 = new User("testName", "passwd");
-   	user5.signUp(AOT, user5.username, "passwd");
-   	// User Login
-   	user5.login(AOT, user5.username, "passwd");
-   	// Checks if user leaves comment
-   	user5.comment(AOT, APP, "Comment1");
-   	assertTrue(APP.comments.contains("Comment1"));
-    // User Logs out
-   	user5.logout(AOT);
-   	user5.comment(AOT, APP, "Comment2");
-   	// Checks to make sure user cannot comment when signed out
-   	assertFalse(APP.comments.contains("Comment2"));
+        // Create User
+        User user5 = new User("testName", "passwd");
+        user5.signUp(AOT, user5.username, "passwd");
+        // User Login
+        user5.login(AOT, user5.username, "passwd");
+        // Checks if user leaves comment
+        user5.comment(AOT, APP, "Comment1");
+        assertTrue(APP.comments.contains("Comment1"));
+        // User Logs out
+        user5.logout(AOT);
+        user5.comment(AOT, APP, "Comment2");
+        // Checks to make sure user cannot comment when signed out
+        assertFalse(APP.comments.contains("Comment2"));
     }
 
     @Test
     public void testSearch() {
+        // Create User
+    	User user6 = new User("testName", "passwd");
+    	user6.signUp(AOT, user6.username, "passwd");
+    	// User Login
+    	user6.login(AOT, user6.username, "passwd");
+    	// Add APP to AOT
+    	AOT.apps.add(APP);
+    	// Check that search results are found
+    	assertTrue(user6.search(AOT, "App"));
+    	// Check that search results are not found
+    	assertFalse(user6.search(AOT, "apple"));
 
     }
 }
