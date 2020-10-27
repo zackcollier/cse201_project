@@ -11,7 +11,7 @@ public class User {
 		password = pword;	
 	}
 
-	public boolean signUp(AppOrganizationTool AOT, String username, String password) {
+	public boolean signUp(AppOrganizationTool AOT) {
 		if (!AOT.users.containsKey(username)) {
 			AOT.users.put(username, password);
 			System.out.println("Signup Successful");
@@ -21,8 +21,8 @@ public class User {
 		return false;
 	}
 
-	public boolean login(AppOrganizationTool AOT, String username, String password) {
-		if (AOT.users.containsKey(username) && AOT.users.get(username).equals(password)) {
+	public boolean login(AppOrganizationTool AOT, String user, String pword) {
+		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) {
 			AOT.currentUser = this;
 			return true;
 		}
