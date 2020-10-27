@@ -48,7 +48,17 @@ public class UserTest {
 
     @Test
     public void testLogout() {
-
+        // Create User
+    	User user4 = new User("testName", "passwd");
+    	user4.signUp(AOT, user4.username, "passwd");
+    	// User Login
+    	user4.login(AOT, user4.username, "passwd");
+    	// Checks the user logged in is the current user 
+    	assertTrue(AOT.currentUser.equals(user4));
+    	// Test User logout
+    	assertTrue(user4.logout(AOT));
+    	// Checks that current user is no longer signed in
+    	assertTrue(AOT.currentUser == null);
     }
 
     @Test
