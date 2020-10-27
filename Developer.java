@@ -18,9 +18,9 @@ public class Developer extends User {
 	 * @param case The number of the case that the user will have inputted with a button press
 	 * @param update The updated text that needs to be applied
 	 */
-	public void updateApp(Application app, int case, String update) {
+	public void updateApp(Application app, int param, String update) {
 		if (app.company.equals(company)) {
-			switch (case) {
+			switch (param) {
 				case 1 : app.name = update;  break;
 				case 2 app.description = update;  break;
 				case 3 : app.company = update;  break;
