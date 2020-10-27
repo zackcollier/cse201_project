@@ -42,7 +42,7 @@ public class User {
 		app.comments.add(userComment);
 	}
 	
-	public void search(AppOrganizationTool AOT, String str) {
+	public boolean search(AppOrganizationTool AOT, String str) {
 		ArrayList<Application> searchApps = new ArrayList<>();
 		for (Application a : AOT.apps) {
 			for (String s : a.toArray()) {
@@ -56,6 +56,11 @@ public class User {
 		for (Application app : searchApps) {
 			app.printDetails();
 		}
+		
+		if (searchApps.isEmpty())
+			return false;
+		
+		return true;
 	}
 
 }
