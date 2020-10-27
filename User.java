@@ -35,7 +35,10 @@ public class User {
 		return true;
 	}
 	
-	public void comment(Application app, String userComment) {
+	public void comment(AppOrganizationTool AOT, Application app, String userComment) {
+		if(AOT.currentUser == null)
+			return;
+		
 		app.comments.add(userComment);
 	}
 	
