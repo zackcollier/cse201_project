@@ -9,11 +9,12 @@ import org.junit.Test;
 
 public class UserTest {
     private AppOrganizationTool AOT;
-
+    private Application APP;
     @Before
     public void setUp() {
         // Creates an AOT
         AOT = new AppOrganizationTool();
+        APP = new Application(null, null, null, null, null, 0, null, null);
     }
 
     @Test
@@ -63,7 +64,19 @@ public class UserTest {
 
     @Test
     public void testComment() {
-
+    // Create User
+    User user5 = new User("testName", "passwd");
+   	user5.signUp(AOT, user5.username, "passwd");
+   	// User Login
+   	user5.login(AOT, user5.username, "passwd");
+   	// Checks if user leaves comment
+   	user5.comment(AOT, APP, "Comment1");
+   	assertTrue(APP.comments.contains("Comment1"));
+    // User Logs out
+   	user5.logout(AOT);
+   	user5.comment(AOT, APP, "Comment2");
+   	// Checks to make sure user cannot comment when signed out
+   	assertFalse(APP.comments.contains("Comment2"));
     }
 
     @Test
