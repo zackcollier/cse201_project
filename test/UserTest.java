@@ -37,7 +37,13 @@ public class UserTest {
 
     @Test
     public void testLogin() {
-
+        // Create User
+    	User user3 = new User("testName", "passwd");
+    	user3.signUp(AOT, user3.username, "passwd");
+    	// Test User Login
+    	assertTrue(user3.login(AOT, user3.username, "passwd"));
+    	// Checks the user logged in is the current user 
+    	assertTrue(AOT.currentUser.equals(user3));
     }
 
     @Test
