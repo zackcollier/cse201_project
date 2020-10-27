@@ -8,8 +8,6 @@ public class Application {
 	public String platforms;
 	public String version;
 	public String genre;
-	public int questionAnswer;
-	public String answer;
 	public float averageRating;
 	private ArrayList<Float> allRatings = new ArrayList<>();
 	public ArrayList<String> comments = new ArrayList<>();
@@ -31,15 +29,11 @@ public class Application {
 			String appCompany,
 			String appPlatforms,
 	      		String appVersion,
-			int getQuestionAnswer,
-			String questionAnswer,
 	        	String appGenre) {
 		name = appName; 
 		description = appDescription;
 		company = appCompany;
 		platforms = appPlatforms;
-		this.questionAnswer = getQuestionAnswer;
-		answer = questionAnswer;
 		version = appVersion;
 		genre = appGenre;
 	}
