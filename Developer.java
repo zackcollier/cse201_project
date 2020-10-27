@@ -22,11 +22,12 @@ public class Developer extends User {
 		if (app.company.equals(company)) {
 			switch (param) {
 				case 1 : app.name = update;  break;
-				case 2 app.description = update;  break;
+				case 2 : app.description = update;  break;
 				case 3 : app.company = update;  break;
-				case 4: app.platforms = update;  break;
-				case 5: app.version = update;  break;
-				case 6: app.genre = update;  break;
+				case 4 : app.platforms = update;  break;
+				case 5 : app.version = update;  break;
+				case 6 : app.genre = update;  break;
+			}
 		}
 	}
 	/**
