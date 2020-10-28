@@ -86,6 +86,6 @@ public class Application {
 		String print = "";
 		for (String s : this.toArray())
 			print += s + ", ";
-		System.out.println(print.substring(0, print.length - 2));
+		System.out.println(print.substring(0, print.length() - 2));
 	}
 }
