@@ -94,4 +94,36 @@ public class UserTest {
     	assertFalse(user6.search(AOT, "apple"));
 
     }
+    @Test
+    public void testSort() {
+        // Create a user and sign in
+        User user7 = new User("testName", "passwd");
+        user7.signUp(AOT);
+        user7.login(AOT, user7.username, "passwd");
+        // There are currently three different parameters that applications can be sorted on. Name, genre, and rating. There is currently no way for an app to get a rating so this will only be testing the name and genre
+        Application app1 = new Application("first", "", "", "", "", "2nd genre");
+        Application app2 = new Application("second", "", "", "", "", "3rd genre");
+        Application app3 = new Application("third", "", "", "", "", "1st genre");
+        // Add apps to the AOT
+        AOT.apps.add(app1);
+        AOT.apps.add(app2);
+        AOT.apps.add(app3);
+        // Sort AOT apps by name
+        user7.sort(AOT, 1);
+        // Create an ArrayList to compare the sorting with for names 
+        ArrayList<Application> firstComparison = new ArrayList<Application>();
+        firstComparison.add(app1);
+        firstComparison.add(app2);
+        firstComparison.add(app3);
+        // Check equality
+        assertEquals("Name sort is not working", AOT.apps, firstComparison);
+        // Create an ArrayList to compare the sorting with genres
+        ArrayList<Application> secondComparison = new ArrayList<Application>();
+        secondComparison.add(app3);
+        secondComparison.add(app1);
+        secondComparison.add(app2);
+        // Sort by genre
+        user7.sort(AOT, 2);
+        assertEquals("Genre sort is not working", AOT.apps, secondComparison);
+    }
 }
