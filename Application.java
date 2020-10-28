@@ -75,7 +75,42 @@ public class Application {
 		else return 0;
 	}
 	
+	/*
+	* return true is the string that user search is fit for the app data, return false if these are not fit
+	* judgment: Part of the string searched by the user is contained in the data of the app, which is part of the data
+	* The is fit judgment method needs to be improved
+	*/
+	private boolean isFit(String data, String ask){
+		String datal = data.toLowerCase();
+		String askl = ask.toLowerCase();
+		if isBestFit(data,ask) {
+		return true;
+		}
+		if (datal.length>askl.length){
+		for (int i = 0; i < askl.length; i++){
+		if (datal.substring(i,askl.length).equals(datal))
+			return true;
+		}
+		}
+		return false;
+	}
 	
+	/*
+	* return true if the string that user search is best fit for the app data, return false if these are not best fit
+	* judgment: The string searched by the user is completely contained at the beginning of the app's data, or these two are exactly the same.
+	* The best fit judgment method needs to be improved
+	*/
+	private boolean isBestFit(String data, String ask){
+	       String datal = data.toLowerCase();
+	       String askl = data.toLowerCase();
+	       if (datal.equals(askl)){
+		return true;       
+	       }
+		else if (datal.length>askl.length && datal.substring(0,askl.length-1).equals(askl)){
+		return true;	
+		}
+		else return false;
+	}
 	
 	/**
 	 * 
