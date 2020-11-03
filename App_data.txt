@@ -1,4 +1,4 @@
-"Wechat" "Chat app" "Tercent Technology" "IOS and Andriod" "1111" "chat"
-"Wechat1" "Chat app" "Tercent Technology" "IOS and Andriod" "2222" "game"
-"Wechat2" "Chat app" "Tercent Technology" "IOS and Andriod" "3333" "education"
-"Wechat3" "Chat app" "Tercent Technology" "IOS and Andriod" "4444" "shopping"
+"Wechat" "Chat app" "Tencent Technology" "IOS and Andriod" "1111" "chat"
+"Wechat1" "Chat app" "Tencent Technology" "IOS and Andriod" "2222" "game"
+"Wechat2" "Chat app" "Tencent Technology" "IOS and Andriod" "3333" "education"
+"Wechat3" "Chat app" "Tencent Technology" "IOS and Andriod" "4444" "shopping"
