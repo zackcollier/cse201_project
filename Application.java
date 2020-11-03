@@ -12,7 +12,7 @@ public class Application {
 	private ArrayList<Float> allRatings = new ArrayList<>();
 	public ArrayList<String> comments = new ArrayList<>();
 	
-	private List<Answer> mAllAnswers;
+	//private List<Answer> mAllAnswers;
 	
 	/**
 	 * The basic class that contains information for applications
@@ -83,12 +83,12 @@ public class Application {
 	private boolean isFit(String data, String ask){
 		String datal = data.toLowerCase();
 		String askl = ask.toLowerCase();
-		if isBestFit(data,ask) {
+		if (isBestFit(data,ask)) {
 		return true;
 		}
-		if (datal.length>askl.length){
-		for (int i = 0; i < askl.length; i++){
-		if (datal.substring(i,askl.length).equals(datal))
+		if (datal.length()>askl.length()){
+		for (int i = 0; i < askl.length(); i++){
+		if (datal.substring(i,askl.length()).equals(datal))
 			return true;
 		}
 		}
@@ -106,7 +106,7 @@ public class Application {
 	       if (datal.equals(askl)){
 		return true;       
 	       }
-		else if (datal.length>askl.length && datal.substring(0,askl.length-1).equals(askl)){
+		else if (datal.length()>askl.length() && datal.substring(0,askl.length()-1).equals(askl)){
 		return true;	
 		}
 		else return false;
