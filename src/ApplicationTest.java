@@ -32,3 +32,4 @@ class ApplicationTest {
     	assertTrue(user.equals(userCommenter));
 	}
 
+}
