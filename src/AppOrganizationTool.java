@@ -56,8 +56,8 @@ public class AppOrganizationTool {
         
         data = new ArrayList<ArrayList<String>>();
 
-		Scanner in = new Scanner(new File("App_data.txt"));
-		importData(in);
+		//Scanner in = new Scanner(new File("App_data.txt"));
+		//importData(in);
 		
 		sortFilterData = new ArrayList<ArrayList<String>>(data);
 
@@ -92,7 +92,7 @@ public class AppOrganizationTool {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
-		in.close();
+		//in.close();
         
     } 
 	
