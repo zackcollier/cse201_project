@@ -15,12 +15,12 @@ public class DeveloperTest {
     public void setUp() {
         // Creates an AOT
         AOT = new AppOrganizationTool();
-        APP = new Application("App", "", "sampleCompany", "", "", 0, "", "");
+        APP = new Application("App", "", "sampleCompany", "", "", "");
     }
 
     @Test
     public void testUpdateApp() {
-        Developer dev1 = new Developer("dev1", "passwd", "sampleCompany");
+        Developer dev1 = new Developer("dev1", "passwd");
         // Update name
         dev1.updateApp(APP, 1, "TestName");
         assertTrue("Name is not updating", "TestName".equals(APP.name));
@@ -34,7 +34,7 @@ public class DeveloperTest {
         dev1.updateApp(APP, 1, "TestName2");
         assertFalse("Name is updating when the companies do not match", "TestName2".equals(APP.name));
         // Update developer company to continue test
-        dev1 = new Developer("dev1", "passwd", "TestCompany");
+        dev1 = new Developer("dev1", "passwd");
         // Update platforms
         dev1.updateApp(APP, 4, "TestPlatform");
         assertTrue("Platforms is not updating", "TestPlatform".equals(APP.platforms));
@@ -48,7 +48,7 @@ public class DeveloperTest {
 
     @Test
     public void testSubmitRequest() {
-        Developer dev2 = new Developer("dev2", "passwd", "sampleCompany");
+        Developer dev2 = new Developer("dev2", "passwd");
         // Submit request
         dev2.submitRequest(AOT, APP);
         // The queue to compare to
