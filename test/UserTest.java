@@ -2,6 +2,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -14,7 +15,7 @@ public class UserTest {
     public void setUp() {
         // Creates an AOT
         AOT = new AppOrganizationTool();
-        APP = new Application("App", "", "", "", "", 0, "", "");
+        APP = new Application("App", "", "", "", "", "");
     }
 
     @Test
@@ -25,12 +26,12 @@ public class UserTest {
         User user1 = new User("testName", "passwd");
         User user2 = new User("testName", "passwd");
         // User sign up with free username
-        assertTrue(user1.signUp(AOT, user1.username, "passwd"));
+        assertTrue(user1.signUp(AOT));
         userComparison.put("testName", "passwd");
         // Checks that the user is added to the AOT
         assertEquals(AOT.users, userComparison);
         // User sign up with taken username
-        assertFalse(user1.signUp(AOT, user2.username, "passwd"));
+        assertFalse(user1.signUp(AOT));
         // Checks that in the case that a username is already taken a new entry is not
         // added
         assertEquals(AOT.users, userComparison);
@@ -40,7 +41,7 @@ public class UserTest {
     public void testLogin() {
         // Create User
     	User user3 = new User("testName", "passwd");
-    	user3.signUp(AOT, user3.username, "passwd");
+    	user3.signUp(AOT);
     	// Test User Login
     	assertTrue(user3.login(AOT, user3.username, "passwd"));
     	// Checks the user logged in is the current user 
@@ -51,7 +52,7 @@ public class UserTest {
     public void testLogout() {
         // Create User
     	User user4 = new User("testName", "passwd");
-    	user4.signUp(AOT, user4.username, "passwd");
+    	user4.signUp(AOT);
     	// User Login
     	user4.login(AOT, user4.username, "passwd");
     	// Checks the user logged in is the current user 
@@ -66,7 +67,7 @@ public class UserTest {
     public void testComment() {
         // Create User
         User user5 = new User("testName", "passwd");
-        user5.signUp(AOT, user5.username, "passwd");
+        user5.signUp(AOT);
         // User Login
         user5.login(AOT, user5.username, "passwd");
         // Checks if user leaves comment
@@ -83,7 +84,7 @@ public class UserTest {
     public void testSearch() {
         // Create User
     	User user6 = new User("testName", "passwd");
-    	user6.signUp(AOT, user6.username, "passwd");
+    	user6.signUp(AOT);
     	// User Login
     	user6.login(AOT, user6.username, "passwd");
     	// Add APP to AOT
