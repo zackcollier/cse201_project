@@ -26,6 +26,7 @@ public class SortGUI extends JComboBox<String> implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		@SuppressWarnings("unchecked")
 		JComboBox<String> combo = (JComboBox<String>) e.getSource();
 		String selectedSort = (String) combo.getSelectedItem();
 
