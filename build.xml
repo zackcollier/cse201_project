@@ -1,3 +1,6 @@
+<!-- Simply run XML to build and run project -->
+<!-- Ensure source code is in "src" folder, and "build" and "dist" folders are not being used for anything else -->
+<!-- Optionally, folder names and version number can be altered by changing the properties declared below -->
 <project name="AppOrganizationTool" default="exec" basedir=".">
 	<property name="version">0.5</property>
 	<property name="src" location="src" />
@@ -12,6 +15,7 @@
 	<target name="init" depends="clean">
 		<tstamp />
 		<mkdir dir="${build}" />
+		<mkdir dir="${dist}/lib" />
 	</target>
 
 	<target name="compile" depends="init" description="compile source code">
@@ -19,7 +23,6 @@
 	</target>
 
 	<target name="dist" depends="compile" description="generates distribution">
-		<mkdir dir="${dist}/lib" />
 		<jar destfile="${dist}/lib/AppOrganizationTool-${version}.jar" basedir="${build}" />
 	</target>
 
