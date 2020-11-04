@@ -1,4 +1,4 @@
-<project name="AppOrganizationTool" default="dist" basedir=".">
+<project name="AppOrganizationTool" default="dist" basedir="cse201_project">
   <property name="version">0.5</version>
   <property name="src" location="src"/>
   <property name="build" location="build"/>
