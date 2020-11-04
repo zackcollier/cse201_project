@@ -127,7 +127,7 @@ public class AppOrganizationTool {
 			index = line.indexOf(" ");
 			currentInput = line.substring(0, index+1); // App Gener
 			currentApp.add(currentInput);
-			data.add(new ArrayList(currentApp));
+			data.add(new ArrayList<String>(currentApp));
 			currentApp.clear();
 		}
 	}
