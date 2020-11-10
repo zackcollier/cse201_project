@@ -8,8 +8,9 @@ public class Developer extends User {
 	 * @param user The username of the developer account.
 	 * @param pword The password for a target user account.
 	 */
-	public Developer(String user, String pword) {
+	public Developer(String user, String pword, String companyName) {
 		super(user,pword);
+		company = companyName;
 	}
 	
 	/**
