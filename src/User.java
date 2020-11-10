@@ -64,7 +64,7 @@ public class User {
 		return 1;
 	}
 	
-	public boolean search(AppOrganizationTool AOT, String str) {
+	public ArrayList<Application> search(AppOrganizationTool AOT, String str) {
 		ArrayList<Application> searchApps = new ArrayList<>();
 		for (Application a : AOT.apps) {
 			for (String s : a.toArray()) {
@@ -79,10 +79,7 @@ public class User {
 			app.printDetails();
 		}
 		
-		if (searchApps.isEmpty())
-			return false;
-		
-		return true;
+		return searchApps;
 	}
 
 	public boolean sort(AppOrganizationTool AOT, int param) {
