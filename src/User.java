@@ -37,11 +37,12 @@ public class User {
 		return true;
 	}
 	
-	public void comment(AppOrganizationTool AOT, Application app, String userComment) {
+	public int comment(AppOrganizationTool AOT, Application app, String userComment) {
 		if(AOT.currentUser == null)
-			return;
+			return 0;
 		
-		app.comments.add(userComment);
+		app.comments.put(username, userComment);
+		return 1;
 	}
 	
 	public boolean search(AppOrganizationTool AOT, String str) {
