@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Application {
 
@@ -10,7 +10,7 @@ public class Application {
 	public String genre;
 	public float averageRating;
 	private ArrayList<Float> allRatings = new ArrayList<>();
-	public ArrayList<String> comments = new ArrayList<>();
+	public HashMap<String, String> comments = new HashMap<>();
 	
 	//private List<Answer> mAllAnswers;
 	
