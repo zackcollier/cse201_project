@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class User {
 
@@ -26,6 +28,13 @@ public class User {
 	public boolean signUp(AppOrganizationTool AOT) {
 		if (!AOT.users.containsKey(username)) {
 			AOT.users.put(username, password);
+			try { 
+		        	PrintWriter writer = new PrintWriter("login_system.txt");
+		        	writer.write(username + "," + password);
+		        	writer.close();
+			 } catch(IOException e) {
+					System.out.println("Login Database Not Found");
+				}
 			System.out.println("Signup Successful");
 			return true;
 		}
