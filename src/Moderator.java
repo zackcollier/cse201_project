@@ -1,15 +1,21 @@
 
 public class Moderator extends User {
 
+	/**
+	 * Creates a moderator object using account credentials.
+	 * @param user The username of the moderator account.
+	 * @param pword The password for a target user account.
+	 */
 	public Moderator(String user, String pword) {
 		super(user, pword);
-		
 	}
 	
-	public void removeComment(Application app, String comment) {
-		// The comment will always be able to be removed because moderators will use
-		// the GUI to select which comments to remove
-		app.comments.remove(comment);
-		
+	/**
+	 * Removes a comment that was left on an app.
+	 * @param app The application on which the comment should be removed.
+	 * @param user The username of the user whose comment should be removed.
+	 */
+	public void removeComment(Application app, String user) {
+		app.comments.remove(user);	
 	}
 }
