@@ -7,12 +7,22 @@ public class User {
 	private String password;
 		
 	public User() {}
-		
+	
+	/**
+	 * Creates a user object using account credentials.
+	 * @param user The username of the user account.
+	 * @param pword The password for a target user account.
+	 */	
 	public User(String user, String pword) {	
 		username = user;
 		password = pword;	
 	}
-
+	
+	/**
+	 * Updates an application that the developer has access to.
+	 * @param AOT The instance of the tool where the new user is being signed up to.
+	 * @return true if the signup was sucessful, false if not.
+	 */
 	public boolean signUp(AppOrganizationTool AOT) {
 		if (!AOT.users.containsKey(username)) {
 			AOT.users.put(username, password);
@@ -33,12 +43,12 @@ public class User {
 	}
 		
 	public boolean logout(AppOrganizationTool AOT) {
-		AOT.currentUser = null;
+		AOT.currentUser = new User("","");
 		return true;
 	}
 	
 	public int comment(AppOrganizationTool AOT, Application app, String userComment) {
-		if(AOT.currentUser == null)
+		if(AOT.currentUser.username.equals(""))
 			return 0;
 		
 		app.comments.put(username, userComment);
