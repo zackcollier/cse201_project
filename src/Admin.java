@@ -12,7 +12,7 @@ public class Admin extends Moderator {
 	
 	/**
 	 * Shows the details of an app that was submitted for approval.
-	 * @param The application to be reviewed.
+	 * @param app The application to be reviewed.
 	 */
 	public void viewRequest(Application app) {
 		app.printDetails();
@@ -20,8 +20,8 @@ public class Admin extends Moderator {
 	
 	/**
 	 * Approves an app into the app.
-	 * @param The Tool where the app will be sent to.
-	 * @param The application to be reviewed.
+	 * @param AOT The Tool where the app will be sent to.
+	 * @param app The application to be reviewed.
 	 */
 	public void approveRequest(AppOrganizationTool tool, Application app) {
 		tool.apps.add(app);	
