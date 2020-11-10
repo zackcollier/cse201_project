@@ -90,9 +90,9 @@ public class UserTest {
     	// Add APP to AOT
     	AOT.apps.add(APP);
     	// Check that search results are found
-    	assertTrue(user6.search(AOT, "App"));
+    	assertTrue(user6.search(AOT, "App").contains(APP));
     	// Check that search results are not found
-    	assertFalse(user6.search(AOT, "apple"));
+    	assertFalse(user6.search(AOT, "apple").contains(APP));
 
     }
     @Test
