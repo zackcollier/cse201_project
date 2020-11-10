@@ -50,18 +50,14 @@ public class Application {
 	}
 	
 	/**
-	 * 
-	 * @return An arraylist containing all of the instance variables for the application.
-	 *
-	// *didn't finish yet, these variables need change to arrays, which can help filter better, and this method change to return arraylist
+	 * @return An arraylist containing all of the important instance variables for the application.
 	 */
 	public String[] toArray() {
-		//return new String[][] {name[], description[], company[], platforms[], version[], String.valueOf(averageRating)[]};
 		return new String[] {name, description, company, platforms, version, String.valueOf(averageRating)};
 	}
 	
 	/**
-	*get the number of what part of the app information that the user is interested in, so we can use it to filter the search.
+	* @return the number of what part of the app information that the user is interested in, so we can use it to filter the search.
 	*/
 	public int getfilter(String questionAnswer){
 	   String questiontext1 = "User please input the number of the information part of the app you interested to use the filter.";
