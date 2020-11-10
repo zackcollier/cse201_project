@@ -72,12 +72,12 @@ public class UserTest {
         user5.login(AOT, user5.username, "passwd");
         // Checks if user leaves comment
         user5.comment(AOT, APP, "Comment1");
-        assertTrue(APP.comments.contains("Comment1"));
+        assertTrue(APP.comments.containsValue("Comment1"));
         // User Logs out
         user5.logout(AOT);
         user5.comment(AOT, APP, "Comment2");
         // Checks to make sure user cannot comment when signed out
-        assertFalse(APP.comments.contains("Comment2"));
+        assertFalse(APP.comments.containsValue("Comment2"));
     }
 
     @Test
