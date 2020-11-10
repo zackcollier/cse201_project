@@ -20,7 +20,7 @@ public class AppOrganizationTool {
 	ArrayList<Application> apps = new ArrayList<>();
 	Queue<Application> requests = new LinkedBlockingQueue<>();
 	Map<String, String> users = new HashMap<>();
-	User currentUser;
+	User currentUser = new User("","");
 	
 	private static ArrayList<ArrayList<String>> data;
 	public static ArrayList<ArrayList<String>> sortFilterData;
