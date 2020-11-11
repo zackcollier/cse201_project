@@ -97,7 +97,7 @@ public class User {
 		return true;
 	}
 	
-	**
+	/**
 	 * Allows a user to search for apps.
 	 * @param AOT The instance of the tool where the search is occuring.
 	 * @param str The string that the user wants to search for.
