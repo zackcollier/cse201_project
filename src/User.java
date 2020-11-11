@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.FileWriter;
 
 public class User {
 
@@ -29,8 +30,8 @@ public class User {
 		if (!AOT.users.containsKey(username)) {
 			AOT.users.put(username, password);
 			try { 
-		        	PrintWriter writer = new PrintWriter("login_system.txt");
-		        	writer.write(username + "," + password);
+		        	PrintWriter writer = new PrintWriter(new FileWriter("login_system.txt",true));
+		        	writer.write(username + "," + password + '\n');
 		        	writer.close();
 			 } catch(IOException e) {
 					System.out.println("Login Database Not Found");
