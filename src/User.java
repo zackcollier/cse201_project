@@ -7,7 +7,7 @@ import java.io.FileWriter;
 public class User {
 
 	public String username;
-	private String password;
+	public String password;
 		
 	public User() {}
 	
