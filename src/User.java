@@ -42,6 +42,13 @@ public class User {
 		return false;
 	}
 
+	/**
+	 * Allows a user to log in, and be stored as the user in the tool.
+	 * @param AOT The instance of the tool where the new user is being logged in to.
+	 * @param user The username of the desired user to log in.
+	 * @param pword The password of the desired user to log in.
+	 * @return true if the login was sucessful, false if not.
+	 */
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
 		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) {
 			AOT.currentUser = this;
@@ -50,12 +57,24 @@ public class User {
 		System.out.println("Login failed. Please check your login information.");
 		return false;		
 	}
-		
+	
+	/**
+	 * Allows a user to log out, preventing a comment and rating from being written by their account.
+	 * @param AOT The instance of the tool where the new user is being logged in to.
+	 * @return true if the logout was sucessful.
+	 */
 	public boolean logout(AppOrganizationTool AOT) {
 		AOT.currentUser = new User("","");
 		return true;
 	}
 	
+	/**
+	 * Allows a user to leave a comment on an app. Can only have 1 per application.
+	 * @param AOT The instance of the tool where the user is logged into.
+	 * @param app The app the user wants to leave a comment on.
+	 * @param userComment The comment the user wants to give the app.
+	 * @return true if the comment was sucessful, false if not.
+	 */
 	public int comment(AppOrganizationTool AOT, Application app, String userComment) {
 		if(AOT.currentUser.username.equals(""))
 			return 0;
@@ -64,6 +83,26 @@ public class User {
 		return 1;
 	}
 	
+	/**
+	 * Allows a user to leave a rating on an app. Can only have 1 per application.
+	 * @param AOT The instance of the tool where the user is logged into.
+	 * @param app The app the user wants to leave a rating on.
+	 * @param userRating The rating the user wants to give the app.
+	 * @return true if the rating was sucessful, false if not.
+	 */
+	public boolean rating(AppOrganizationTool AOT, Application app, float userRating) {
+		if (AOT.currentUser.username.equals(""))
+			return false;
+		app.ratings.put(username, userRating);
+		return true;
+	}
+	
+	**
+	 * Allows a user to search for apps.
+	 * @param AOT The instance of the tool where the search is occuring.
+	 * @param str The string that the user wants to search for.
+	 * @return A list of the apps that satisfied the search.
+	 */
 	public ArrayList<Application> search(AppOrganizationTool AOT, String str) {
 		ArrayList<Application> searchApps = new ArrayList<>();
 		for (Application a : AOT.apps) {
@@ -82,6 +121,13 @@ public class User {
 		return searchApps;
 	}
 
+	
+	/**
+	 * Allows a user to sort by a given parameter: name, genre, rating, platform.
+	 * @param AOT The instance of the tool where the sort is occuring.
+	 * @param param The parameter that the user wants to sort by.
+	 * @return A list of the apps that satisfied the sort.
+	 */
 	public boolean sort(AppOrganizationTool AOT, int param) {
 		switch (param) {
 			case 1 : AOT.apps.sort(nameSort);  break;
