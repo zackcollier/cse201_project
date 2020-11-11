@@ -82,16 +82,46 @@ public class AppOrganizationTool {
 		JPanel resultsPanel = new JPanel();
 		resultsPanel.setLayout(new GridLayout(0, 5));
 		
+		// action listener for search button
 		searchBttn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// put text from search field into text variable
 				String text = sf.getText();
+				// clear results panel if content is there
 				resultsPanel.removeAll();
+				// loop through applications in search results
 				for (Application a : currentUser.search(AOT, text)) {
+					// create a button for each search result with name, company, and rating
 					JButton result = new JButton("<html>" + a.name + "<br/>" + a.company + "<br/>" + a.averageRating);
 					result.setBorder(new LineBorder(Color.BLACK));
 					result.setPreferredSize(new Dimension(100, 100));
-					resultsPanel.add(result);
+					// action listener for each result button
+					result.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// open new window, list information about app through labels
+							JFrame appFrame = new JFrame(a.name);
+							appFrame.setLayout(new FlowLayout());
+							JLabel name = new JLabel("Name: " + a.name);
+							JLabel description = new JLabel("Description: " + a.description);
+							JLabel company = new JLabel("Company: " + a.company);
+							JLabel platforms = new JLabel("Platforms: " + a.platforms);
+							JLabel version = new JLabel("Version: " + a.version);
+							JLabel genre = new JLabel("Genre: " + a.genre);
+							appFrame.add(name);
+							appFrame.add(description);
+							appFrame.add(company);
+							appFrame.add(platforms);
+							appFrame.add(version);
+							appFrame.add(genre);
+							appFrame.setSize(200, 200);
+							appFrame.setVisible(true);
+						}
+					});
+					// add search result button to panel
+					resultsPanel.add(result, BorderLayout.SOUTH);
+					// refreshes main window; necessary to make result buttons appear after pressing search button, otherwise window must be resized in order to see results
 					frame.setVisible(true);
 				}
 			}
@@ -111,7 +141,7 @@ public class AppOrganizationTool {
 		jp.add(signUpBttn);
 		jp.add(sf);
 		jp.add(searchBttn);
-		jp.add(resultsPanel, BorderLayout.AFTER_LAST_LINE);
+		frame.add(resultsPanel, BorderLayout.SOUTH);
 		
 		//jp.add(sorts);
 		jp.add(genres);
