@@ -1,5 +1,10 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -14,13 +19,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 public class AppOrganizationTool {
 
 	ArrayList<Application> apps = new ArrayList<>();
 	Queue<Application> requests = new LinkedBlockingQueue<>();
 	Map<String, String> users = new HashMap<>();
-	User currentUser = new User("","");
+	static User currentUser = new User("","");
 	
 	private static ArrayList<ArrayList<String>> data;
 	public static ArrayList<ArrayList<String>> sortFilterData;
@@ -44,22 +50,7 @@ public class AppOrganizationTool {
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
         AppOrganizationTool AOT = new AppOrganizationTool();
-          
-        try { 
-        	Scanner scanner = new Scanner(new File("login_system.txt"));
-        	while(scanner.hasNextLine()) {
-        		String line = scanner.nextLine();
-        		String userAndPass[] = line.split(",");
-        		AOT.users.put(userAndPass[0],userAndPass[1]);
-        	}
-        		
-        } catch(FileNotFoundException e) {
-			System.out.println("Login Database Not Found");
-		}
-        User user1 = new User("testName", "passwd");
-    	user1.signUp(AOT);
-		
-	AOT.requests.add(app1);
+        AOT.requests.add(app1);
         AOT.requests.add(app2);
         a1.viewRequest(AOT.getRequests().peek());
         a1.approveRequest(AOT, AOT.getRequests().remove());
@@ -82,10 +73,29 @@ public class AppOrganizationTool {
 
 		JTextField jtf = new JTextField("Username");
 		JTextField jpwf = new JTextField("Password");
+		JTextField sf = new JTextField(25);
+		JButton searchBttn = new JButton("Search");
 		JButton logInBttn = new JButton("Log in");
 		JLabel lbl = new JLabel("New User?");
 		JButton signUpBttn = new JButton("Click here to create an account");
 		JPanel jp = new JPanel();
+		JPanel resultsPanel = new JPanel();
+		resultsPanel.setLayout(new GridLayout(0, 5));
+		
+		searchBttn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String text = sf.getText();
+				resultsPanel.removeAll();
+				for (Application a : currentUser.search(AOT, text)) {
+					JButton result = new JButton("<html>" + a.name + "<br/>" + a.company + "<br/>" + a.averageRating);
+					result.setBorder(new LineBorder(Color.BLACK));
+					result.setPreferredSize(new Dimension(100, 100));
+					resultsPanel.add(result);
+					frame.setVisible(true);
+				}
+			}
+		});
 
 		
 		//sorts = new SortGUI();
@@ -99,6 +109,9 @@ public class AppOrganizationTool {
 		jp.add(logInBttn);
 		jp.add(lbl);
 		jp.add(signUpBttn);
+		jp.add(sf);
+		jp.add(searchBttn);
+		jp.add(resultsPanel, BorderLayout.AFTER_LAST_LINE);
 		
 		//jp.add(sorts);
 		jp.add(genres);
