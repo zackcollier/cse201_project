@@ -23,7 +23,7 @@ Zack Collier, Craig Conner, Qi Feng, Brett Herman, Nathaniel Richardson
     $ ant
 Make sure that Ant is properly installed and both your JAVA_HOME and ANT_HOME environment variables are set.
 
-## [Documentation]
+## Documentation
 ### Application
 - Each app has a name, description, company, ratings, comments, version, and genre associated with it
 - The details of apps can be shown
