@@ -15,6 +15,8 @@ Zack Collier, Craig Conner, Qi Feng, Brett Herman, Nathaniel Richardson
 - Select JUnit, press next, select JUnit5, Finish, Apply and Close
 - To run with Ant, expand the cse201_project-master folder
 - Right click build.xml, select 'run as...', select Ant Build
+
+![](EclipseInstall.gif)
 ### CLI with Git and Ant
     $ git clone https://github.com/zackcollier/cse201_project.git
     $ cd cse201_project
