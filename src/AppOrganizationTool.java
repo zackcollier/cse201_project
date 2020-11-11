@@ -50,6 +50,8 @@ public class AppOrganizationTool {
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
         AppOrganizationTool AOT = new AppOrganizationTool();
+        User user1 = new User("testName", "testPassword");
+        AOT.users.put(user1.username, user1.password);
         AOT.requests.add(app1);
         AOT.requests.add(app2);
         a1.viewRequest(AOT.getRequests().peek());
@@ -80,7 +82,63 @@ public class AppOrganizationTool {
 		JButton signUpBttn = new JButton("Click here to create an account");
 		JPanel jp = new JPanel();
 		JPanel resultsPanel = new JPanel();
+		JPanel statusPanel = new JPanel();
 		resultsPanel.setLayout(new GridLayout(0, 5));
+		
+		// action listener for sign up button
+		signUpBttn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String username = jtf.getText();
+				String password = jpwf.getText();
+				JFrame signupFrame = new JFrame("Signup");
+				signupFrame.setLayout(new FlowLayout());
+				User u = new User(username, password);
+				if (u.signUp(AOT)) {
+					JLabel success = new JLabel("Account created! Please login.");
+					signupFrame.add(success);
+				} else {
+					JLabel fail = new JLabel("Account creation failed! Username is taken.");
+					signupFrame.add(fail);
+				}
+				jtf.setText("Username");
+				jpwf.setText("Password");
+				signupFrame.setSize(300, 60);
+				signupFrame.setVisible(true);
+			}
+		});
+		
+		// action listener for login button
+		logInBttn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// read username and password text fields into string variables
+				String username = jtf.getText();
+				String password = jpwf.getText();
+				// open new window to alert user of success or fail
+				JFrame loginFrame = new JFrame("Login");
+				loginFrame.setLayout(new FlowLayout());
+				// create temp user with username and password, attempt to login
+				User u = new User(username, password);
+				// if login is successful, change current user to user, display success message
+				if (u.login(AOT, u.username, u.password)) {
+					currentUser = u;
+					JLabel success = new JLabel("Login successful!");
+					loginFrame.add(success);
+					statusPanel.removeAll();
+					JLabel status = new JLabel("Currently logged in as " + currentUser.username);
+					statusPanel.add(status);
+					frame.setVisible(true);
+				} else {  // if login fails, display fail message
+					JLabel fail = new JLabel("Login failed! Please check your login information.");
+					loginFrame.add(fail);
+				}
+				jtf.setText("Username");
+				jpwf.setText("Password");
+				loginFrame.setSize(300, 60);
+				loginFrame.setVisible(true);
+			}
+		});
 		
 		// action listener for search button
 		searchBttn.addActionListener(new ActionListener() {
@@ -142,6 +200,7 @@ public class AppOrganizationTool {
 		jp.add(sf);
 		jp.add(searchBttn);
 		frame.add(resultsPanel, BorderLayout.SOUTH);
+		frame.add(statusPanel, BorderLayout.NORTH);
 		
 		//jp.add(sorts);
 		jp.add(genres);
