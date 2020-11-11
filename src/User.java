@@ -93,7 +93,7 @@ public class User {
 	public boolean rating(AppOrganizationTool AOT, Application app, float userRating) {
 		if (AOT.currentUser.username.equals(""))
 			return false;
-		app.ratings.put(username, userRating);
+		app.allRatings.put(username, userRating);
 		return true;
 	}
 	
