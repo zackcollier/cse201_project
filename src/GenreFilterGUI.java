@@ -8,12 +8,12 @@ import javax.swing.*;
 public class GenreFilterGUI extends JPanel implements ItemListener, ActionListener{
 	
 	private ArrayList<String> availableGenres;
-	private ArrayList<String> activeGenres;
-	private ArrayList<JCheckBox> checkBoxes;
+	public ArrayList<String> activeGenres;
+	public ArrayList<JCheckBox> checkBoxes;
 	private JPanel buttons;
 	private JPanel checkBoxList;
-	private JButton filterButton;
-	private JButton cancelButton;
+	public JButton filterButton;
+	public JButton cancelButton;
 	private GenreFilter filter;
 	private ArrayList<ArrayList<String>> data;
 	
