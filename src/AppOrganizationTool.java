@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ import javax.swing.border.LineBorder;
 public class AppOrganizationTool {
 
 	ArrayList<Application> apps = new ArrayList<>();
+	Map<JButton, Application> resultList = new HashMap<JButton, Application>();
 	Queue<Application> requests = new LinkedBlockingQueue<>();
 	Map<String, String> users = new HashMap<>();
 	static User currentUser = new User("","");
@@ -32,7 +34,7 @@ public class AppOrganizationTool {
 	public static ArrayList<ArrayList<String>> sortFilterData;
 	
 	private static SortGUI sorts;
-	private static GenreFilterGUI genres;
+	public static GenreFilterGUI genres;
 
 	
 	public AppOrganizationTool()  {}
@@ -46,7 +48,7 @@ public class AppOrganizationTool {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-        Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "App 1 Platforms", "App 1 Version", "App 1 Genre");
+        Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "App 1 Platforms", "App 1 Version", "Education");
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
         AppOrganizationTool AOT = new AppOrganizationTool();
@@ -148,6 +150,9 @@ public class AppOrganizationTool {
 				String text = sf.getText();
 				// clear results panel if content is there
 				resultsPanel.removeAll();
+				frame.setVisible(true);
+				// clear list of results
+				AOT.resultList.clear();
 				// loop through applications in search results
 				for (Application a : currentUser.search(AOT, text)) {
 					// create a button for each search result with name, company, and rating
@@ -179,6 +184,8 @@ public class AppOrganizationTool {
 					});
 					// add search result button to panel
 					resultsPanel.add(result, BorderLayout.SOUTH);
+					// add search result to list of results
+					AOT.resultList.put(result, a);
 					// refreshes main window; necessary to make result buttons appear after pressing search button, otherwise window must be resized in order to see results
 					frame.setVisible(true);
 				}
@@ -187,7 +194,39 @@ public class AppOrganizationTool {
 
 		
 		//sorts = new SortGUI();
-		genres = new GenreFilterGUI();	
+		genres = new GenreFilterGUI();
+		
+		genres.filterButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resultsPanel.removeAll();
+				frame.setVisible(true);
+				for (Map.Entry<JButton,Application> entry : AOT.resultList.entrySet()) {
+					boolean display = false;
+					for (JCheckBox cb : genres.checkBoxes) {
+						if (cb.isSelected() && (entry.getValue().genre == cb.getText())) {
+							display = true;
+						}
+					}
+					if (display) {
+						resultsPanel.add(entry.getKey());
+					}
+					frame.setVisible(true);
+				}
+			}
+		});
+		
+		genres.cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resultsPanel.removeAll();
+				frame.setVisible(true);
+				for (Map.Entry<JButton,Application> entry : AOT.resultList.entrySet()) {
+					resultsPanel.add(entry.getKey(), BorderLayout.SOUTH);
+					frame.setVisible(true);
+				}
+			}
+		});
 		
 		jp.setLayout(new FlowLayout());
 		frame.setLayout(new BorderLayout());
