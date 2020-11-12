@@ -47,7 +47,11 @@ public class AppOrganizationTool {
 		return requests;
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException {	
+		data = new ArrayList<ArrayList<String>>()；
+		Scanner in = new Scanner(new File("App_Data.txt"));
+             	importData(in);
+		sortFilterData = new ArrayList<ArrayList<String>>(data);
         Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "App 1 Platforms", "App 1 Version", "Education");
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
@@ -65,11 +69,6 @@ public class AppOrganizationTool {
 	//a1.search("1");
         
         data = new ArrayList<ArrayList<String>>();
-
-		//Scanner in = new Scanner(new File("App_data.txt"));
-		//importData(in);
-		
-		sortFilterData = new ArrayList<ArrayList<String>>(data);
 
 		JFrame.setDefaultLookAndFeelDecorated(true);
 
