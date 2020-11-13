@@ -10,7 +10,7 @@ public class Application {
 	public String version;
 	public String genre;
 	public float averageRating;
-	public ArrayList<Float> allRatings = new ArrayList<>();
+	public HashMap<String, Float> allRatings = new ArrayList<>();
 	public HashMap<String, String> comments = new HashMap<>();
 	
 	//private List<Answer> mAllAnswers;
