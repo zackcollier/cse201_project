@@ -76,12 +76,11 @@ public class User {
 	 * @param userComment The comment the user wants to give the app.
 	 * @return true if the comment was sucessful, false if not.
 	 */
-	public int comment(AppOrganizationTool AOT, Application app, String userComment) {
+	public boolean comment(AppOrganizationTool AOT, Application app, String userComment) {
 		if(AOT.currentUser.username.equals(""))
-			return 0;
-		
+			return false;
 		app.comments.put(username, userComment);
-		return 1;
+		return true;
 	}
 	
 	/**
@@ -94,7 +93,7 @@ public class User {
 	public boolean rating(AppOrganizationTool AOT, Application app, float userRating) {
 		if (AOT.currentUser.username.equals(""))
 			return false;
-		app.allRatings.add(userRating);
+		app.allRatings.put(username, userRating);
 		return true;
 	}
 	
@@ -147,6 +146,8 @@ public class User {
 			app.printDetails();
 		return apps;
 	}
+			 
+	// Comparatorrs for sorting
 		
 	Comparator<Application> nameSort = new Comparator<Application>() {
 		@Override
