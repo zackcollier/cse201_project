@@ -28,7 +28,27 @@ Make sure that Ant is properly installed and both your JAVA_HOME and ANT_HOME en
 - Each app has a name, description, company, ratings, comments, version, and genre associated with it
 - The details of apps can be shown
 - Apps will have a calculated average rating
-
+### User
+- Each user has a username and password
+- Each user can login, signup, and log out
+- Users can give an app a rating, leave a comment on an app, and search within fields for apps
+- Users can sort a list of apps, with the comparators given in the class
+### Developer
+- Type of user, but has a company name
+- Developers can edit the details of an app, but not comments and ratings
+- Developers can only edit if their company name matches
+- Developers can submit requests for apps/changes to be comitted to the app
+### Moderator
+- Type of user, but can delete comments from app comment sections
+### Admin
+- Type of Moderator, but can view and approve requests for apps to be put into the app
+### Storage
+- User information stored in login_system.txt
+- App information stored in App_data.txt
+### AppOrganizationTool
+- Where the app instance is run
+- Holds and retrieves from files the user and app data
+- 
 ## [Goals for Iteration 1](#Iter1)
 - [x] Search Apps
 - [x] View Applications
