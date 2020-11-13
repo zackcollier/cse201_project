@@ -129,21 +129,23 @@ public class User {
 	 * @param param The parameter that the user wants to sort by.
 	 * @return A list of the apps that satisfied the sort.
 	 */
-	public boolean sort(AppOrganizationTool AOT, int param) {
+	public ArrayList<Application> sort(ArrayList<Application> apps, int param) {
 		switch (param) {
-			case 1 : AOT.apps.sort(nameSort);  break;
-			case 2 : AOT.apps.sort(genreSort);  break;
-			case 3 : AOT.apps.sort(ratingSort);  break;
+			case 1 : apps.sort(nameSort);  break;
+			case 2 : apps.sort(genreSort);  break;
+			case 3 : apps.sort(ratingSort);  break;
+			case 4 : apps.sort(platformSort);  break;
 			default: return false;
 		}
 		String str;
 		if (param == 1)		str = "name";
 		else if (param == 2)	str = "genre";
-		else			str = "rating";
+		else if (param == 3     str = "rating";
+		else			str = "platform";
 		System.out.println("Apps Sorted by '" + str + "':");
 		for (Application app : AOT.apps) 
 			app.printDetails();
-		return true;
+		return apps;
 	}
 		
 	Comparator<Application> nameSort = new Comparator<Application>() {
@@ -164,6 +166,13 @@ public class User {
 		@Override
 		public int compare(Application a1, Application a2) {
 			return a1.averageRating < a2.averageRating ? 1 : -1;
+		}
+	};
+	
+	Comparator<Application> platformSort = new Comparator<Application>() {
+		@Override
+		public int compare(Application a1, Application a2) {
+			return a1.platforms.compareTo(a2.platforms);
 		}
 	};
 }
