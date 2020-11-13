@@ -1,3 +1,13 @@
 Features:
-Tips and Tricks:
-Troubleshooting:
+Users can log in, log out, sign up, search, sort, and filter through apps
+Apps show a name, description, company they belong to, version number, genre, 
+Developers are users that can change app details if they work for the same company
+Moderators are users that can remove comments
+Admins are moderators that can view and approve changes to the app repository
+
+Tips and Tricks: 
+The cancel button can be used to undo a filter and return to the original search results or default results
+
+Troubleshooting: 
+Users can only submit one rating or comment per app
+Apps are not deleted when updated
