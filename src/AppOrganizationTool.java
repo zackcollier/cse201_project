@@ -48,7 +48,7 @@ public class AppOrganizationTool {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {	
-		data = new ArrayList<ArrayList<String>>()；
+		data = new ArrayList<ArrayList<String>>();
 		Scanner in = new Scanner(new File("App_Data.txt"));
              	importData(in);
 		sortFilterData = new ArrayList<ArrayList<String>>(data);
