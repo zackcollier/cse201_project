@@ -202,7 +202,13 @@ public class AppOrganizationTool {
 							secondDetailsPanel.add(genre, BorderLayout.SOUTH);
 							JPanel commentPanel = new JPanel(new GridLayout(0, 1));
 							JLabel commentHeader = new JLabel("COMMENTS");
+							JPanel addComment = new JPanel(new FlowLayout());
+							JTextField commentBar = new JTextField("Type a comment here");
+							JButton submitComment = new JButton("Submit Comment");
+							addComment.add(commentBar);
+							addComment.add(submitComment);
 							commentPanel.add(commentHeader, BorderLayout.NORTH);
+							commentPanel.add(addComment);
 							if (a.comments.size() == 0) {
 								JLabel noComments = new JLabel("No comments found!");
 								commentPanel.add(noComments);
@@ -221,7 +227,7 @@ public class AppOrganizationTool {
 							JPanel container = new JPanel(new FlowLayout());
 							container.add(borderPanel);
 							appFrame.getContentPane().add(container);
-							appFrame.setSize(200, 200);
+							appFrame.setSize(285, 285);
 							appFrame.setVisible(true);
 						}
 					});
