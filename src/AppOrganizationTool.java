@@ -205,6 +205,37 @@ public class AppOrganizationTool {
 							JPanel addComment = new JPanel(new FlowLayout());
 							JTextField commentBar = new JTextField("Type a comment here");
 							JButton submitComment = new JButton("Submit Comment");
+							submitComment.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									if (currentUser.username.equals("")) {
+										JFrame fail = new JFrame("Comment failed");
+										JLabel commentFail = new JLabel("Failed to add comment! Please login.");
+										fail.add(commentFail);
+										fail.setSize(220, 60);
+										fail.setVisible(true);
+									} else {
+										JFrame success = new JFrame("Comment added");
+										JLabel commentSuccess = new JLabel("Comment added successfully!");
+										success.add(commentSuccess);
+										String text = commentBar.getText();
+										currentUser.comment(AOT, a, text);
+										commentPanel.removeAll();
+										commentPanel.add(commentHeader, BorderLayout.NORTH);
+										commentPanel.add(addComment);
+										for (Map.Entry<String, ArrayList<String>> entry : a.comments.entrySet()) {
+											for (String s : entry.getValue()) {
+												JLabel comment = new JLabel(entry.getKey() + ": " + s);
+												commentPanel.add(comment);
+											}
+										}
+										success.setSize(185, 60);
+										appFrame.pack();
+										appFrame.setVisible(true);
+										success.setVisible(true);
+									}
+								}
+							});
 							addComment.add(commentBar);
 							addComment.add(submitComment);
 							commentPanel.add(commentHeader, BorderLayout.NORTH);
