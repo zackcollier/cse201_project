@@ -110,7 +110,7 @@ public class UserTest {
         AOT.apps.add(app2);
         AOT.apps.add(app3);
         // Sort AOT apps by name
-        user7.sort(AOT, 1);
+        user7.sort(AOT, AOT.apps, 1);
         // Create an ArrayList to compare the sorting with for names 
         ArrayList<Application> firstComparison = new ArrayList<Application>();
         firstComparison.add(app1);
@@ -124,7 +124,7 @@ public class UserTest {
         secondComparison.add(app1);
         secondComparison.add(app2);
         // Sort by genre
-        user7.sort(AOT, 2);
+        user7.sort(AOT, AOT.apps, 2);
         assertEquals("Genre sort is not working", AOT.apps, secondComparison);
     }
 }
