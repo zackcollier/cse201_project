@@ -12,7 +12,7 @@ public class Application {
 	public String genre;
 	public float averageRating;
 	public HashMap<String, Float> allRatings = new HashMap<String, Float>();
-	public HashMap<String, String> comments = new HashMap<String, String>();
+	public HashMap<String, ArrayList<String>> comments = new HashMap<String, ArrayList<String>>();
 	
 	//private List<Answer> mAllAnswers;
 	
