@@ -200,9 +200,20 @@ public class AppOrganizationTool {
 							secondDetailsPanel.add(platforms, BorderLayout.NORTH);
 							secondDetailsPanel.add(version, BorderLayout.CENTER);
 							secondDetailsPanel.add(genre, BorderLayout.SOUTH);
-							JPanel commentPanel = new JPanel(new FlowLayout());
+							JPanel commentPanel = new JPanel(new GridLayout(0, 1));
 							JLabel commentHeader = new JLabel("COMMENTS");
-							commentPanel.add(commentHeader);
+							commentPanel.add(commentHeader, BorderLayout.NORTH);
+							if (a.comments.size() == 0) {
+								JLabel noComments = new JLabel("No comments found!");
+								commentPanel.add(noComments);
+							} else {
+								for (Entry<String, ArrayList<String>> entry : a.comments.entrySet()) {
+									for (String s : entry.getValue()) {
+										JLabel comment = new JLabel(entry.getKey() + ": " + s);
+										commentPanel.add(comment);
+									}
+								}
+							}
 							JPanel borderPanel = new JPanel(new BorderLayout());
 							borderPanel.add(firstDetailsPanel, BorderLayout.NORTH);
 							borderPanel.add(secondDetailsPanel, BorderLayout.CENTER);
