@@ -207,7 +207,7 @@ public class AppOrganizationTool {
 								JLabel noComments = new JLabel("No comments found!");
 								commentPanel.add(noComments);
 							} else {
-								for (Entry<String, ArrayList<String>> entry : a.comments.entrySet()) {
+								for (Map.Entry<String, ArrayList<String>> entry : a.comments.entrySet()) {
 									for (String s : entry.getValue()) {
 										JLabel comment = new JLabel(entry.getKey() + ": " + s);
 										commentPanel.add(comment);
