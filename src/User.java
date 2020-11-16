@@ -79,7 +79,12 @@ public class User {
 	public boolean comment(AppOrganizationTool AOT, Application app, String userComment) {
 		if(AOT.currentUser.username.equals(""))
 			return false;
-		app.comments.put(username, userComment);
+		ArrayList<String> commentList = new ArrayList<String>();
+		if (app.comments.get(username) != null) {
+			commentList = app.comments.get(username);
+		}
+		commentList.add(userComment);
+		app.comments.put(username, commentList);
 		return true;
 	}
 	
