@@ -44,8 +44,9 @@ public class Application {
 	 */
 	public void calcAvgRating() {
 		float sum = 0;
-		for (Entry rating : allRatings) 
+		for (Map.Entry<String, Float> rating : allRatings.entrySet()) {
 			sum += rating.second;
+		}
 		averageRating = sum/allRatings.size();
 		
 	}
