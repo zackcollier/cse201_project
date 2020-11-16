@@ -168,6 +168,11 @@ public class AppOrganizationTool {
 				frame.setVisible(true);
 				// clear list of results
 				AOT.resultList.clear();
+				if (currentUser.search(AOT, text).size() == 0) {
+					JLabel noResults = new JLabel("No results found!");
+					resultsPanel.add(noResults, BorderLayout.SOUTH);
+					frame.setVisible(true);
+				}
 				// loop through applications in search results
 				for (Application a : currentUser.search(AOT, text)) {
 					// create a button for each search result with name, company, and rating
