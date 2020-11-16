@@ -10,8 +10,8 @@ public class Application {
 	public String version;
 	public String genre;
 	public float averageRating;
-	public HashMap<String, Float> allRatings = new ArrayList<>();
-	public HashMap<String, String> comments = new HashMap<>();
+	public HashMap<String, Float> allRatings = new HashMap<String, Float>();
+	public HashMap<String, String> comments = new HashMap<String, String>();
 	
 	//private List<Answer> mAllAnswers;
 	
@@ -44,8 +44,8 @@ public class Application {
 	 */
 	public void calcAvgRating() {
 		float sum = 0;
-		for (float rating : allRatings) 
-			sum += rating;
+		for (Entry rating : allRatings) 
+			sum += rating.second;
 		averageRating = sum/allRatings.size();
 		
 	}
