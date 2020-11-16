@@ -186,18 +186,30 @@ public class AppOrganizationTool {
 							// open new window, list information about app through labels
 							JFrame appFrame = new JFrame(a.name);
 							appFrame.setLayout(new FlowLayout());
+							JPanel firstDetailsPanel = new JPanel(new BorderLayout());
 							JLabel name = new JLabel("Name: " + a.name);
 							JLabel description = new JLabel("Description: " + a.description);
 							JLabel company = new JLabel("Company: " + a.company);
+							firstDetailsPanel.add(name, BorderLayout.NORTH);
+							firstDetailsPanel.add(description, BorderLayout.CENTER);
+							firstDetailsPanel.add(company, BorderLayout.SOUTH);
+							JPanel secondDetailsPanel = new JPanel(new BorderLayout());
 							JLabel platforms = new JLabel("Platforms: " + a.platforms);
 							JLabel version = new JLabel("Version: " + a.version);
 							JLabel genre = new JLabel("Genre: " + a.genre);
-							appFrame.add(name);
-							appFrame.add(description);
-							appFrame.add(company);
-							appFrame.add(platforms);
-							appFrame.add(version);
-							appFrame.add(genre);
+							secondDetailsPanel.add(platforms, BorderLayout.NORTH);
+							secondDetailsPanel.add(version, BorderLayout.CENTER);
+							secondDetailsPanel.add(genre, BorderLayout.SOUTH);
+							JPanel commentPanel = new JPanel(new FlowLayout());
+							JLabel commentHeader = new JLabel("COMMENTS");
+							commentPanel.add(commentHeader);
+							JPanel borderPanel = new JPanel(new BorderLayout());
+							borderPanel.add(firstDetailsPanel, BorderLayout.NORTH);
+							borderPanel.add(secondDetailsPanel, BorderLayout.CENTER);
+							borderPanel.add(commentPanel, BorderLayout.SOUTH);
+							JPanel container = new JPanel(new FlowLayout());
+							container.add(borderPanel);
+							appFrame.getContentPane().add(container);
 							appFrame.setSize(200, 200);
 							appFrame.setVisible(true);
 						}
