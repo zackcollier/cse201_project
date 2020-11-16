@@ -128,7 +128,23 @@ public class AppOrganizationTool {
 					loginFrame.add(success);
 					statusPanel.removeAll();
 					JLabel status = new JLabel("Currently logged in as " + currentUser.username);
+					JButton logoutBttn = new JButton("Logout");
+					JFrame logoutFrame = new JFrame("Logout");
+					logoutFrame.setLayout(new FlowLayout());
+					logoutBttn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							currentUser = new User("","");
+							JLabel logoutSuccess = new JLabel("Logout successful!");
+							logoutFrame.add(logoutSuccess);
+							logoutFrame.setSize(300, 60);
+							statusPanel.removeAll();
+							frame.setVisible(true);
+							logoutFrame.setVisible(true);
+						}
+					});
 					statusPanel.add(status);
+					statusPanel.add(logoutBttn);
 					frame.setVisible(true);
 				} else {  // if login fails, display fail message
 					JLabel fail = new JLabel("Login failed! Please check your login information.");
