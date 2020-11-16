@@ -128,13 +128,13 @@ public class User {
 	 * @param param The parameter that the user wants to sort by.
 	 * @return A list of the apps that satisfied the sort.
 	 */
-	public ArrayList<Application> sort(ArrayList<Application> apps, int param) {
+	public ArrayList<Application> sort(AppOrganizationTool AOT, ArrayList<Application> apps, int param) {
 		switch (param) {
 			case 1 : apps.sort(nameSort);  break;
 			case 2 : apps.sort(genreSort);  break;
 			case 3 : apps.sort(ratingSort);  break;
 			case 4 : apps.sort(platformSort);  break;
-			default: return false;
+			default: return apps;
 		}
 		String str;
 		if (param == 1)		str = "name";
