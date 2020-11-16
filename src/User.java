@@ -139,7 +139,7 @@ public class User {
 		String str;
 		if (param == 1)		str = "name";
 		else if (param == 2)	str = "genre";
-		else if (param == 3     str = "rating";
+		else if (param == 3)    str = "rating";
 		else			str = "platform";
 		System.out.println("Apps Sorted by '" + str + "':");
 		for (Application app : AOT.apps) 
