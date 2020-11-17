@@ -13,11 +13,11 @@ public class Sort {
 		
 	}
 	
-	public void setGenres(ArrayList<String> sorts) {
+	public void setSorts(ArrayList<String> sorts) {
 		this.sorts = new ArrayList<String>(sorts);
 	}
 
-	public ArrayList<ArrayList<String>> getFilteredGenres() {
+	public ArrayList<ArrayList<String>> getFilteredSorts() {
 		ArrayList<ArrayList<String>> filtered = new ArrayList<ArrayList<String>>();
 		System.out.println("Platform Sort");
 		boolean isWrong = false;
