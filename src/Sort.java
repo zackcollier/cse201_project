@@ -1,4 +1,37 @@
+import java.util.ArrayList;
+
+// platform
 
 public class Sort {
+	private ArrayList<String> sorts;
+	private ArrayList<ArrayList<String>> data;
 
+	public Sort() {
+		
+		this.sorts = new ArrayList<String>();
+		data = new ArrayList<ArrayList<String>>(AppOrganizationTool.sortFilterData);
+		
+	}
+	
+	public void setGenres(ArrayList<String> sorts) {
+		this.sorts = new ArrayList<String>(sorts);
+	}
+
+	public ArrayList<ArrayList<String>> getFilteredGenres() {
+		ArrayList<ArrayList<String>> filtered = new ArrayList<ArrayList<String>>();
+		System.out.println("Platform Sort");
+		boolean isWrong = false;
+		for (ArrayList<String> a : data) {
+			for (int i = 0; i < sorts.size(); i++) {
+				if (a.get(3).indexOf(sorts.get(i)) == -1) {
+					isWrong = true;
+				}
+			}
+			if (!isWrong) {
+				filtered.add(a);
+			}
+			isWrong = false;
+		}
+		return filtered;
+	}
 }
