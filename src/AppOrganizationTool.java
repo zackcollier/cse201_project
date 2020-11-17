@@ -30,11 +30,14 @@ public class AppOrganizationTool {
 	Map<String, String> users = new HashMap<>();
 	static User currentUser = new User("","");
 	
-	private static ArrayList<ArrayList<String>> data;
-	public static ArrayList<ArrayList<String>> sortFilterData;
+	private static ArrayList<ArrayList<String>> genreData;
+	public static ArrayList<ArrayList<String>> sortGenreFilterData;
+	private static ArrayList<ArrayList<String>> platformData;
+	public static ArrayList<ArrayList<String>> sortPlatformFilterData;
 	
 	private static SortGUI sorts;
 	public static GenreFilterGUI genres;
+	public static PlatformFilterGUI platforms;
 
 	
 	public AppOrganizationTool()  {}
@@ -48,12 +51,14 @@ public class AppOrganizationTool {
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {	
-		data = new ArrayList<ArrayList<String>>();
-		Scanner in = new Scanner(new File("App_Data.txt"));
-             	importData(in);
-		sortFilterData = new ArrayList<ArrayList<String>>(data);
-        Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "App 1 Platforms", "App 1 Version", "Education");
-        Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
+		genreData = new ArrayList<ArrayList<String>>();
+		platformData = new ArrayList<ArrayList<String>>();
+		// Scanner in = new Scanner(new File("App_Data.txt"));
+        // importData(in);
+		sortGenreFilterData = new ArrayList<ArrayList<String>>(genreData);
+		sortPlatformFilterData = new ArrayList<ArrayList<String>>(platformData);
+        Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "iOS", "App 1 Version", "Education");
+        Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "Android", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
         AppOrganizationTool AOT = new AppOrganizationTool();
         User user1 = new User("testName", "testPassword");
@@ -68,7 +73,8 @@ public class AppOrganizationTool {
         AOT.getApps().get(1).printDetails();
 	//a1.search("1");
         
-        data = new ArrayList<ArrayList<String>>();
+        genreData = new ArrayList<ArrayList<String>>();
+        platformData = new ArrayList<ArrayList<String>>();
 
 		JFrame.setDefaultLookAndFeelDecorated(true);
 
@@ -275,6 +281,7 @@ public class AppOrganizationTool {
 		
 		//sorts = new SortGUI();
 		genres = new GenreFilterGUI();
+		platforms = new PlatformFilterGUI();
 		
 		genres.filterButton.addActionListener(new ActionListener() {
 			@Override
@@ -308,6 +315,38 @@ public class AppOrganizationTool {
 			}
 		});
 		
+		platforms.filterButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resultsPanel.removeAll();
+				frame.setVisible(true);
+				for (Map.Entry<JButton, Application> entry : AOT.resultList.entrySet()) {
+					boolean display = false;
+					for (JCheckBox cb : platforms.checkBoxes) {
+						if (cb.isSelected() && (entry.getValue().platforms == cb.getText())) {
+							display = true;
+						}
+					}
+					if (display) {
+						resultsPanel.add(entry.getKey());
+					}
+					frame.setVisible(true);
+				}
+			}
+		});
+		
+		platforms.cancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resultsPanel.removeAll();
+				frame.setVisible(true);
+				for (Map.Entry<JButton, Application> entry : AOT.resultList.entrySet()) {
+					resultsPanel.add(entry.getKey(), BorderLayout.SOUTH);
+					frame.setVisible(true);
+				}
+			}
+		});
+		
 		jp.setLayout(new FlowLayout());
 		frame.setLayout(new BorderLayout());
 		frame.add(jp, BorderLayout.CENTER);
@@ -323,8 +362,9 @@ public class AppOrganizationTool {
 		
 		//jp.add(sorts);
 		jp.add(genres);
+		jp.add(platforms);
 		
-		frame.setSize(600, 400);
+		frame.setSize(870, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
@@ -363,7 +403,8 @@ public class AppOrganizationTool {
 			index = line.indexOf(" ");
 			currentInput = line.substring(0, index+1); // App Gener
 			currentApp.add(currentInput);
-			data.add(new ArrayList<String>(currentApp));
+			genreData.add(new ArrayList<String>(currentApp));
+			platformData.add(new ArrayList<String>(currentApp));
 			currentApp.clear();
 		}
 	}
