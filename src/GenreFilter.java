@@ -10,7 +10,7 @@ public class GenreFilter {
 	public GenreFilter() {
 		
 		this.genres = new ArrayList<String>();
-		data = new ArrayList<ArrayList<String>>(AppOrganizationTool.sortFilterData);
+		data = new ArrayList<ArrayList<String>>(AppOrganizationTool.sortGenreFilterData);
 		
 	}
 	
