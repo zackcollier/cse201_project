@@ -18,4 +18,15 @@ public class Moderator extends User {
 	public void removeComment(Application app, String user) {
 		app.comments.remove(user);	
 	}
+	
+	// See user login
+	@Override
+	public boolean login(AppOrganizationTool AOT, String user, String pword) {
+		for (Developer m : AOT.moderators) {
+			if (m.username.equals(user) && m.password.equals(pword)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
