@@ -21,7 +21,7 @@ public class Sort {
 		this.sorts = new ArrayList<String>(sorts);
 	}
 /*
-* return the arraylist that have been already filtered
+* @return the arraylist that have been already filtered
 * use arraylist to filter the platforms sdorts
 */
 	public ArrayList<ArrayList<String>> getFilteredSorts() {
