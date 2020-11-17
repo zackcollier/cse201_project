@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 import javax.swing.*;
 
-//platform
+// the filter of the platform
 
 public class SortGUI extends JPanel implements ItemListener, ActionListener {
 
@@ -27,7 +27,9 @@ public class SortGUI extends JPanel implements ItemListener, ActionListener {
 	public JButton cancelButton;
 	private Sort filter;
 	 
-
+/*
+* the GUI of the platoform sort filter, which will be used in AppOrganizationTool.java
+*/
 	public SortGUI() {
 		super();
 
@@ -39,25 +41,26 @@ public class SortGUI extends JPanel implements ItemListener, ActionListener {
 		this.buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		
+		// make the arraylist of the ios and andriod platform
 		this.availableSorts = new ArrayList<String>(Arrays.asList("IOS","Andriod"));
 		
 		this.activeSorts = new ArrayList<String>();
 		
 		checkBoxes = new ArrayList<JCheckBox>();
-			
+	        
+		// Add the JcheckBox of IOS and Andriod
 		JCheckBox IOS = new JCheckBox("IOS", false);
 		JCheckBox Andriod = new JCheckBox("Andriod", false);
-	 
+	       // Add the checkbox for IOS and Andriod
 		checkBoxes.add(IOS);
 		checkBoxes.add(Andriod);
 		 
-	 
 		
 		for (JCheckBox c: checkBoxes) {
 			c.addItemListener(this);
 			checkBoxList.add(c);
 		}
-		
+		// add the JLabel of the "Filter by platform"
 		JLabel filterLabel = new JLabel("Filter by Platform");
 		filterButton = new JButton("Filter");
 		cancelButton = new JButton("Cancel");
