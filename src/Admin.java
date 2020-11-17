@@ -26,4 +26,15 @@ public class Admin extends Moderator {
 	public void approveRequest(AppOrganizationTool tool, Application app) {
 		tool.apps.add(app);	
 	}
+	
+	// See user login
+	@Override
+	public boolean login(AppOrganizationTool AOT, String user, String pword) {
+		for (Developer d : AOT.developers) {
+			if (d.username.equals(user) && d.password.equals(pword)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
