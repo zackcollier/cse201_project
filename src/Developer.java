@@ -1,7 +1,7 @@
 
 public class Developer extends User {
 	
-	private String company;
+	public String company;
 
 	/**
 	 * Creates a developer object using account credentials.
@@ -38,6 +38,16 @@ public class Developer extends User {
 	 */
 	public void submitRequest(AppOrganizationTool AOT, Application app) {	
 		AOT.requests.add(app);
+	}
+	
+	@Override
+	public boolean login(AppOrganizationTool AOT, String user, String pword) {
+		for (Developer d : AOT.developers) {
+			if (d.username.equals(user) && d.password.equals(pword)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }
