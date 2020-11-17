@@ -33,13 +33,11 @@ public class User {
 		        	PrintWriter writer = new PrintWriter(new FileWriter("login_system.txt",true));
 		        	writer.write(username + "," + password + '\n');
 		        	writer.close();
-			 } catch(IOException e) {
-					System.out.println("Login Database Not Found");
-				}
-			System.out.println("Signup Successful");
+			} catch(IOException e) {
+				System.out.println("Login Database Not Found");
+			}
 			return true;
 		}
-		System.out.println("Username is taken.");
 		return false;
 	}
 
@@ -51,10 +49,8 @@ public class User {
 	 * @return true if the login was sucessful, false if not.
 	 */
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
-		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) {
+		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) 
 			return true;
-		}
-		System.out.println("Login failed. Please check your login information.");
 		return false;
 	}
 	
@@ -69,7 +65,7 @@ public class User {
 	}
 	
 	/**
-	 * Allows a user to leave a comment on an app. Can only have 1 per application.
+	 * Allows a user to leave a comment on an app. Can have multiple per application.
 	 * @param AOT The instance of the tool where the user is logged into.
 	 * @param app The app the user wants to leave a comment on.
 	 * @param userComment The comment the user wants to give the app.
@@ -79,9 +75,8 @@ public class User {
 		if(AOT.currentUser.username.equals(""))
 			return false;
 		ArrayList<String> commentList = new ArrayList<String>();
-		if (app.comments.get(username) != null) {
+		if (app.comments.get(username) != null) 
 			commentList = app.comments.get(username);
-		}
 		commentList.add(userComment);
 		app.comments.put(username, commentList);
 		return true;
@@ -116,12 +111,7 @@ public class User {
 					break;
 				}
 			}
-		}
-		System.out.println("Search Results for '" + str + "':");
-		for (Application app : searchApps) {
-			app.printDetails();
-		}
-		
+		}		
 		return searchApps;
 	}
 
@@ -140,18 +130,10 @@ public class User {
 			case 4 : apps.sort(platformSort);  break;
 			default: return apps;
 		}
-		String str;
-		if (param == 1)		str = "name";
-		else if (param == 2)	str = "genre";
-		else if (param == 3)    str = "rating";
-		else			str = "platform";
-		System.out.println("Apps Sorted by '" + str + "':");
-		for (Application app : AOT.apps) 
-			app.printDetails();
 		return apps;
 	}
 			 
-	// Comparatorrs for sorting
+	// Comparators for sorting
 		
 	Comparator<Application> nameSort = new Comparator<Application>() {
 		@Override
