@@ -26,9 +26,14 @@ public class AppOrganizationTool {
 
 	ArrayList<Application> apps = new ArrayList<>();
 	Map<JButton, Application> resultList = new HashMap<JButton, Application>();
-	Queue<Application> requests = new LinkedBlockingQueue<>();
+	public static Queue<Application> requests = new LinkedBlockingQueue<>();
 	Map<String, String> users = new HashMap<>();
+	Map<String, String> admins = new HashMap<>();
+	public static ArrayList<Developer> developers = new ArrayList<Developer>();
 	static User currentUser = new User("","");
+	static Admin currentAdmin = new Admin("","");
+	static Developer currentDeveloper = new Developer("","","");
+	public static ArrayList<Application> sortedApps = new ArrayList<Application>();
 	
 	private static ArrayList<ArrayList<String>> genreData;
 	public static ArrayList<ArrayList<String>> sortGenreFilterData;
@@ -60,7 +65,10 @@ public class AppOrganizationTool {
         Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "iOS", "App 1 Version", "Education");
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "Android", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
+        Developer d1 = new Developer("devName", "devPassword", "App 1 Company");
         AppOrganizationTool AOT = new AppOrganizationTool();
+        AOT.admins.put(a1.username, a1.password);
+        AOT.developers.add(d1);
         User user1 = new User("testName", "testPassword");
         AOT.users.put(user1.username, user1.password);
         AOT.requests.add(app1);
@@ -71,6 +79,8 @@ public class AppOrganizationTool {
         a1.approveRequest(AOT, AOT.getRequests().remove());
         AOT.getApps().get(0).printDetails();
         AOT.getApps().get(1).printDetails();
+        System.out.println(app1.company);
+        System.out.println(d1.company);
 	//a1.search("1");
         
         genreData = new ArrayList<ArrayList<String>>();
@@ -127,6 +137,7 @@ public class AppOrganizationTool {
 				loginFrame.setLayout(new FlowLayout());
 				// create temp user with username and password, attempt to login
 				User u = new User(username, password);
+				Developer d = new Developer(username, password, "");
 				// if login is successful, change current user to user, display success message
 				if (u.login(AOT, u.username, u.password)) {
 					currentUser = u;
@@ -152,6 +163,204 @@ public class AppOrganizationTool {
 					statusPanel.add(status);
 					statusPanel.add(logoutBttn);
 					frame.setVisible(true);
+				} else if (d.login(AOT, d.username, d.password)) {
+					for (Developer dev : developers) {
+						if (dev.username.equals(d.username) && dev.password.equals(d.password)) {
+							d.company = dev.company;
+						}
+					}
+					currentDeveloper = d;
+					JLabel success = new JLabel("Login successful!");
+					loginFrame.add(success);
+					statusPanel.removeAll();
+					JLabel status = new JLabel("Currently logged in as " + currentDeveloper.username);
+					JButton newApp = new JButton("Submit New App");
+					JButton updateApp = new JButton("Update App");
+					JButton logoutBttn = new JButton("Logout");
+					JFrame logoutFrame = new JFrame("Logout");
+					JFrame newAppFrame = new JFrame("New Application");
+					JFrame updateAppFrame = new JFrame("Update Application");
+					newAppFrame.setLayout(new BorderLayout());
+					updateAppFrame.setLayout(new FlowLayout());
+					logoutFrame.setLayout(new FlowLayout());
+					logoutBttn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							currentDeveloper = new Developer("","","");
+							JLabel logoutSuccess = new JLabel("Logout successful!");
+							logoutFrame.add(logoutSuccess);
+							logoutFrame.setSize(300, 60);
+							statusPanel.removeAll();
+							frame.setVisible(true);
+							logoutFrame.setVisible(true);
+						}
+					});
+					newApp.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							JLabel nameLabel = new JLabel("Name: ");
+							JTextField name = new JTextField(25);
+							JLabel descriptionLabel = new JLabel("Description: ");
+							JTextField description = new JTextField(25);
+							JLabel platformLabel = new JLabel("Platform: ");
+							JTextField platform = new JTextField(25);
+							JLabel versionLabel = new JLabel("Version: ");
+							JTextField version = new JTextField(25);
+							JLabel genreLabel = new JLabel("Genre: ");
+							JTextField genre = new JTextField(25);
+							JButton submitButton = new JButton("Submit");
+							submitButton.addActionListener(new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									if (name.getText().length() != 0 && description.getText().length() != 0 && 
+											platform.getText().length() != 0 && version.getText().length() != 0 && genre.getText().length() != 0) {
+										requests.add(new Application(name.getText(), description.getText(),
+											d.company, platform.getText(), version.getText(), genre.getText()));
+										JFrame successFrame = new JFrame("Success");
+										JLabel successLabel = new JLabel("Successfully added request!");
+										successFrame.add(successLabel);
+										successFrame.setSize(300, 60);
+										successFrame.setVisible(true);
+									} else {
+										JFrame failFrame = new JFrame("Fail");
+										JLabel failLabel = new JLabel("Failed to add request! Make sure to fill in all fields.");
+										failFrame.add(failLabel);
+										failFrame.setSize(300, 60);
+										failFrame.setVisible(true);
+									}
+								}
+							});
+							JPanel namePanel = new JPanel();
+							namePanel.setLayout(new FlowLayout());
+							namePanel.add(nameLabel);
+							namePanel.add(name);
+							JPanel descriptionPanel = new JPanel();
+							descriptionPanel.setLayout(new FlowLayout());
+							descriptionPanel.add(descriptionLabel);
+							descriptionPanel.add(description);
+							JPanel platformPanel = new JPanel();
+							platformPanel.setLayout(new FlowLayout());
+							platformPanel.add(platformLabel);
+							platformPanel.add(platform);
+							JPanel versionPanel = new JPanel();
+							versionPanel.setLayout(new FlowLayout());
+							versionPanel.add(versionLabel);
+							versionPanel.add(version);
+							JPanel genrePanel = new JPanel();
+							genrePanel.setLayout(new FlowLayout());
+							genrePanel.add(genreLabel);
+							genrePanel.add(genre);
+							JPanel topPanel = new JPanel(new BorderLayout());
+							JPanel bottomPanel = new JPanel(new BorderLayout());
+							topPanel.add(namePanel, BorderLayout.NORTH);
+							topPanel.add(descriptionPanel, BorderLayout.CENTER);
+							topPanel.add(platformPanel, BorderLayout.SOUTH);
+							bottomPanel.add(versionPanel, BorderLayout.NORTH);
+							bottomPanel.add(genrePanel, BorderLayout.CENTER);
+							bottomPanel.add(submitButton, BorderLayout.SOUTH);
+							newAppFrame.add(topPanel, BorderLayout.NORTH);
+							newAppFrame.add(bottomPanel, BorderLayout.CENTER);
+							newAppFrame.setSize(500, 500);
+							frame.setVisible(true);
+							newAppFrame.setVisible(true);
+						}
+					});
+					
+					updateApp.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							JFrame appFrame = new JFrame("Company Applications");
+							appFrame.setLayout(new FlowLayout());
+							appFrame.setSize(500, 500);
+							for (Application a : AOT.apps) {
+								if (a.company.equals(d.company)) {
+									JButton result = new JButton("<html>" + a.name + "<br/>" + a.company + "<br/>" + a.averageRating);
+									result.setBorder(new LineBorder(Color.BLACK));
+									result.addActionListener(new ActionListener() {
+										@Override
+										public void actionPerformed(ActionEvent e) {
+											JFrame updateFrame = new JFrame("Update App");
+											JLabel nameLabel = new JLabel("Name: ");
+											JTextField name = new JTextField(25);
+											JLabel descriptionLabel = new JLabel("Description: ");
+											JTextField description = new JTextField(25);
+											JLabel platformLabel = new JLabel("Platform: ");
+											JTextField platform = new JTextField(25);
+											JLabel versionLabel = new JLabel("Version: ");
+											JTextField version = new JTextField(25);
+											JLabel genreLabel = new JLabel("Genre: ");
+											JTextField genre = new JTextField(25);
+											JButton submitButton = new JButton("Submit");
+											submitButton.addActionListener(new ActionListener() {
+												@Override
+												public void actionPerformed(ActionEvent e) {
+													if (name.getText().length() != 0 && description.getText().length() != 0 && 
+															platform.getText().length() != 0 && version.getText().length() != 0 && genre.getText().length() != 0) {
+														requests.add(new Application(name.getText(), description.getText(),
+															d.company, platform.getText(), version.getText(), genre.getText()));
+														JFrame successFrame = new JFrame("Success");
+														JLabel successLabel = new JLabel("Successfully added request!");
+														successFrame.add(successLabel);
+														successFrame.setSize(300, 60);
+														successFrame.setVisible(true);
+													} else {
+														JFrame failFrame = new JFrame("Fail");
+														JLabel failLabel = new JLabel("Failed to add request! Make sure to fill in all fields.");
+														failFrame.add(failLabel);
+														failFrame.setSize(300, 60);
+														failFrame.setVisible(true);
+													}
+												}
+											});
+											JPanel namePanel = new JPanel();
+											namePanel.setLayout(new FlowLayout());
+											namePanel.add(nameLabel);
+											namePanel.add(name);
+											JPanel descriptionPanel = new JPanel();
+											descriptionPanel.setLayout(new FlowLayout());
+											descriptionPanel.add(descriptionLabel);
+											descriptionPanel.add(description);
+											JPanel platformPanel = new JPanel();
+											platformPanel.setLayout(new FlowLayout());
+											platformPanel.add(platformLabel);
+											platformPanel.add(platform);
+											JPanel versionPanel = new JPanel();
+											versionPanel.setLayout(new FlowLayout());
+											versionPanel.add(versionLabel);
+											versionPanel.add(version);
+											JPanel genrePanel = new JPanel();
+											genrePanel.setLayout(new FlowLayout());
+											genrePanel.add(genreLabel);
+											genrePanel.add(genre);
+											JPanel topPanel = new JPanel(new BorderLayout());
+											JPanel bottomPanel = new JPanel(new BorderLayout());
+											topPanel.add(namePanel, BorderLayout.NORTH);
+											topPanel.add(descriptionPanel, BorderLayout.CENTER);
+											topPanel.add(platformPanel, BorderLayout.SOUTH);
+											bottomPanel.add(versionPanel, BorderLayout.NORTH);
+											bottomPanel.add(genrePanel, BorderLayout.CENTER);
+											bottomPanel.add(submitButton, BorderLayout.SOUTH);
+											updateFrame.add(topPanel, BorderLayout.NORTH);
+											updateFrame.add(bottomPanel, BorderLayout.CENTER);
+											updateFrame.setSize(500, 500);
+											frame.setVisible(true);
+											updateFrame.setVisible(true);
+										}
+									});
+									appFrame.add(result);
+									appFrame.setVisible(true);
+								}
+							}
+							appFrame.setVisible(true);
+						}
+					});
+					
+					statusPanel.add(status);
+					statusPanel.add(newApp);
+					statusPanel.add(updateApp);
+					statusPanel.add(logoutBttn);
+					frame.setVisible(true);
+					
 				} else {  // if login fails, display fail message
 					JLabel fail = new JLabel("Login failed! Please check your login information.");
 					loginFrame.add(fail);
@@ -364,7 +573,7 @@ public class AppOrganizationTool {
 		jp.add(genres);
 		jp.add(platforms);
 		
-		frame.setSize(870, 400);
+		frame.setSize(880, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
