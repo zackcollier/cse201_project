@@ -40,6 +40,7 @@ public class Developer extends User {
 		AOT.requests.add(app);
 	}
 	
+	// See user login
 	@Override
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
 		for (Developer d : AOT.developers) {
@@ -49,5 +50,4 @@ public class Developer extends User {
 		}
 		return false;
 	}
-	
 }
