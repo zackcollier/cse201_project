@@ -27,7 +27,7 @@ public class User {
 	 * @return true if the signup was sucessful, false if not.
 	 */
 	public boolean signUp(AppOrganizationTool AOT) {
-		if (!AOT.users.containsKey(username)) {
+		if (!AOT.users.containsKey(username) && !AOT.admins.containsKey(username) && !AOT.developers.contains(username)) {
 			AOT.users.put(username, password);
 			try { 
 		        	PrintWriter writer = new PrintWriter(new FileWriter("login_system.txt",true));
@@ -52,11 +52,10 @@ public class User {
 	 */
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
 		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) {
-			AOT.currentUser = this;
 			return true;
 		}
 		System.out.println("Login failed. Please check your login information.");
-		return false;		
+		return false;
 	}
 	
 	/**
