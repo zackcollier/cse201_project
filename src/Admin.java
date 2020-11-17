@@ -14,8 +14,8 @@ public class Admin extends Moderator {
 	 * Shows the details of an app that was submitted for approval.
 	 * @param app The application to be reviewed.
 	 */
-	public void viewRequest(Application app) {
-		app.printDetails();
+	public Application viewRequest(AppOrganizationTool tool) {
+		return tool.requests.pop();
 	}
 	
 	/**
