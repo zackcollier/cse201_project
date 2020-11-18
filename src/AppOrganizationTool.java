@@ -61,6 +61,30 @@ public class AppOrganizationTool {
         Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
         AppOrganizationTool AOT = new AppOrganizationTool();
+	// Load App and User info
+        try { 
+        	Scanner scanner = new Scanner(new File("login_system.txt"));
+        	while(scanner.hasNextLine()) {
+        		String line = scanner.nextLine();
+        		String userAndPass[] = line.split(",");
+        		AOT.users.put(userAndPass[0],userAndPass[1]);
+        	}
+        	scanner.close();
+        } catch(FileNotFoundException e) {
+			System.out.println("Login Database Not Found");
+		}
+        try { 
+        	Scanner scanner = new Scanner(new File("App_data.txt"));
+        	while(scanner.hasNextLine()) {
+        		String line = scanner.nextLine();
+        		String appinfo[] = line.split(",");
+        		Application currentApp = new Application(appinfo[0],appinfo[0],appinfo[0],appinfo[0],appinfo[0],appinfo[0]);
+        		AOT.apps.add(currentApp);
+        	}
+        	scanner.close();
+        } catch(FileNotFoundException e) {
+			System.out.println("App Database Not Found");
+		}
         User user1 = new User("testName", "testPassword");
         AOT.users.put(user1.username, user1.password);
         AOT.requests.add(app1);
