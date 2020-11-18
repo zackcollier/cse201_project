@@ -32,8 +32,8 @@ public class AppOrganizationTool {
 	Map<String, String> moderators = new HashMap<>();
 	public static ArrayList<Developer> developers = new ArrayList<Developer>();
 	public User currentUser = new User("","");
-	static Admin currentAdmin = new Admin("","");
-	static Developer currentDeveloper = new Developer("","","");
+	public Admin currentAdmin = new Admin("","");
+	public Developer currentDeveloper = new Developer("","","");
 	public static ArrayList<Application> sortedApps = new ArrayList<Application>();
 	
 	private static ArrayList<ArrayList<String>> genreData;
@@ -63,7 +63,7 @@ public class AppOrganizationTool {
 		sortGenreFilterData = new ArrayList<ArrayList<String>>(genreData);
 		sortPlatformFilterData = new ArrayList<ArrayList<String>>(platformData);
 		
-        Admin a1 = new Admin("username", "password");
+        Admin a1 = new Admin("Username", "Password");
         Developer d1 = new Developer("devName", "devPassword", "App 1 Company");
         AppOrganizationTool AOT = new AppOrganizationTool();
 	// Load App and User info
@@ -150,7 +150,9 @@ public class AppOrganizationTool {
 				Admin a = new Admin(username, password);
 				// if login is successful, change current user to user, display success message
 				if (u.login(AOT, u.username, u.password)) {
-//					AOT.currentUser = u
+					AOT.currentUser = u;
+					AOT.currentAdmin = new Admin("", "");
+					AOT.currentDeveloper = new Developer("", "", "");
 					JLabel success = new JLabel("Login successful!");
 					loginFrame.add(success);
 					statusPanel.removeAll();
@@ -179,11 +181,13 @@ public class AppOrganizationTool {
 							d.company = dev.company;
 						}
 					}
-					currentDeveloper = d;
+					AOT.currentDeveloper = d;
+					AOT.currentUser = new User("", "");
+					AOT.currentAdmin = new Admin("", "");
 					JLabel success = new JLabel("Login successful!");
 					loginFrame.add(success);
 					statusPanel.removeAll();
-					JLabel status = new JLabel("Currently logged in as " + currentDeveloper.username);
+					JLabel status = new JLabel("Currently logged in as " + AOT.currentDeveloper.username);
 					JButton newApp = new JButton("Submit New App");
 					JButton updateApp = new JButton("Update App");
 					JButton logoutBttn = new JButton("Logout");
@@ -196,7 +200,7 @@ public class AppOrganizationTool {
 					logoutBttn.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							currentDeveloper = new Developer("","","");
+							AOT.currentDeveloper = new Developer("","","");
 							JLabel logoutSuccess = new JLabel("Logout successful!");
 							logoutFrame.add(logoutSuccess);
 							logoutFrame.setSize(300, 60);
@@ -284,7 +288,7 @@ public class AppOrganizationTool {
 							appFrame.setSize(500, 500);
 							for (Application a : AOT.apps) {
 								if (a.company.equals(d.company)) {
-									JButton result = new JButton("<html>" + a.name + "<br/>" + a.company + "<br/>" + a.averageRating);
+									JButton result = new JButton("<html>" + a.name + "<br/>" + a.company);
 									result.setBorder(new LineBorder(Color.BLACK));
 									result.addActionListener(new ActionListener() {
 										@Override
@@ -372,19 +376,23 @@ public class AppOrganizationTool {
 					frame.setVisible(true);
 					
 				} else if (a.login(AOT, a.username, a.password)) {
-					currentAdmin = a;
+					AOT.currentAdmin = a;
+					AOT.currentUser = new User("", "");
+					AOT.currentDeveloper = new Developer("", "", "");
 					JLabel success = new JLabel("Login successful!");
 					loginFrame.add(success);
 					statusPanel.removeAll();
-					JLabel status = new JLabel("Currently logged in as " + currentAdmin.username);
-					
+					JLabel status = new JLabel("Currently logged in as " + AOT.currentAdmin.username);
+					JButton requestsBttn = new JButton("View Requests");
 					JButton logoutBttn = new JButton("Logout");
 					JFrame logoutFrame = new JFrame("Logout");
+					JFrame requestsFrame = new JFrame("Requests");
+					requestsFrame.setLayout(new FlowLayout());
 					logoutFrame.setLayout(new FlowLayout());
 					logoutBttn.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							currentAdmin = new Admin("","");
+							AOT.currentAdmin = new Admin("","");
 							JLabel logoutSuccess = new JLabel("Logout successful!");
 							logoutFrame.add(logoutSuccess);
 							logoutFrame.setSize(300, 60);
@@ -393,7 +401,107 @@ public class AppOrganizationTool {
 							logoutFrame.setVisible(true);
 						}
 					});
+					requestsBttn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							for (Application a : AOT.requests) {
+								JButton request = new JButton("<html>" + a.name + "<br/>" + a.company);
+								requestsFrame.add(request);
+								request.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										JFrame viewRequestFrame = new JFrame("View Request");
+										viewRequestFrame.setLayout(new BorderLayout());
+										JLabel name = new JLabel("App Name: " + a.name);
+										JLabel desc = new JLabel("Description: " + a.description);
+										JLabel company = new JLabel("Company: " + a.company);
+										JLabel platforms = new JLabel("Platform: " + a.platforms);
+										JLabel version = new JLabel("Version: " + a.version);
+										JLabel genre = new JLabel("Genre: " + a.genre);
+										JButton approve = new JButton("Approve Request");
+										JButton deny = new JButton("Deny Request");
+										approve.addActionListener(new ActionListener() {
+											@Override
+											public void actionPerformed(ActionEvent e) {
+												Application oldApp = new Application("", "", "", "", "", "");
+												boolean update = false, fail = false, add = true;
+												for (Application app : AOT.apps) {
+													if (a.name.equals(app.name) && (!a.company.equals(app.company))) {
+														fail = true;
+														add = false;
+														break;
+													} else if (a.name.equals(app.name) && (a.company.equals(app.company))) {
+														update = true;
+														oldApp = app;
+														add = false;
+														break;
+													}
+												}
+												if (add) {
+													AOT.apps.add(a);
+													AOT.requests.remove(a);
+													JFrame addSuccess = new JFrame("Success");
+													JLabel success = new JLabel("Successfully added app!");
+													addSuccess.add(success);
+													addSuccess.setSize(400, 400);
+													addSuccess.setVisible(true);
+												} else if (update) {
+													AOT.requests.remove(a);
+													AOT.apps.remove(AOT.apps.indexOf(oldApp));
+													AOT.apps.add(a);
+													JFrame updateSuccess = new JFrame("Success");
+													JLabel success = new JLabel("Successfully updated app!");
+													updateSuccess.add(success);
+													updateSuccess.setSize(400, 400);
+													updateSuccess.setVisible(true);
+												} else if (fail) {
+													AOT.requests.remove(a);
+													JFrame failFrame = new JFrame("Fail");
+													JLabel failure = new JLabel("Failed to add app! App name taken by other company.");
+													failFrame.add(failure);
+													failFrame.setSize(400, 400);
+													failFrame.setVisible(true);
+												}
+											}
+										});
+										deny.addActionListener(new ActionListener() {
+											@Override
+											public void actionPerformed(ActionEvent e) {
+												AOT.requests.remove(a);
+												JFrame denySuccess = new JFrame("Request Denied");
+												JLabel success = new JLabel("Request Denied Successfully!");
+												denySuccess.add(success);
+												denySuccess.setSize(400, 400);
+												denySuccess.setVisible(true);
+											}
+										});
+										JPanel requestsPanel1 = new JPanel();
+										JPanel requestsPanel2 = new JPanel();
+										requestsPanel1.setLayout(new BorderLayout());
+										requestsPanel2.setLayout(new BorderLayout());
+										JPanel buttonsPanel = new JPanel();
+										requestsPanel1.add(name, BorderLayout.NORTH);
+										requestsPanel1.add(desc, BorderLayout.CENTER);
+										requestsPanel1.add(company, BorderLayout.SOUTH);
+										requestsPanel2.add(platforms, BorderLayout.NORTH);
+										requestsPanel2.add(version, BorderLayout.CENTER);
+										requestsPanel2.add(genre, BorderLayout.SOUTH);
+										buttonsPanel.add(approve);
+										buttonsPanel.add(deny);
+										viewRequestFrame.add(requestsPanel1, BorderLayout.NORTH);
+										viewRequestFrame.add(requestsPanel2, BorderLayout.CENTER);
+										viewRequestFrame.add(buttonsPanel, BorderLayout.SOUTH);
+										viewRequestFrame.setSize(400, 165);
+										viewRequestFrame.setVisible(true);
+									}
+								});
+							}
+							requestsFrame.setSize(500, 500);
+							requestsFrame.setVisible(true);
+						}
+					});
 					statusPanel.add(status);
+					statusPanel.add(requestsBttn);
 					statusPanel.add(logoutBttn);
 					frame.setVisible(true);
 					
@@ -427,7 +535,7 @@ public class AppOrganizationTool {
 				// loop through applications in search results
 				for (Application a : AOT.currentUser.search(AOT, text)) {
 					// create a button for each search result with name, company, and rating
-					JButton result = new JButton("<html>" + a.name + "<br/>" + a.company + "<br/>" + a.averageRating);
+					JButton result = new JButton("<html>" + a.name + "<br/>" + a.company);
 					result.setBorder(new LineBorder(Color.BLACK));
 					result.setPreferredSize(new Dimension(100, 100));
 					// action listener for each result button
@@ -459,7 +567,7 @@ public class AppOrganizationTool {
 							submitComment.addActionListener(new ActionListener() {
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									if (AOT.currentUser.username.equals("")) {
+									if (AOT.currentUser.username.equals("") && AOT.currentDeveloper.username.equals("") && AOT.currentAdmin.username.equals("")) {
 										JFrame fail = new JFrame("Comment failed");
 										JLabel commentFail = new JLabel("Failed to add comment! Please login.");
 										fail.add(commentFail);
@@ -470,7 +578,13 @@ public class AppOrganizationTool {
 										JLabel commentSuccess = new JLabel("Comment added successfully!");
 										success.add(commentSuccess);
 										String text = commentBar.getText();
-										AOT.currentUser.comment(AOT, a, text);
+										if ((!AOT.currentUser.username.equals("")) && (AOT.currentDeveloper.username.equals("")) && (AOT.currentAdmin.username.equals(""))) {
+											AOT.currentUser.comment(AOT, a, text);
+										} else if ((AOT.currentUser.username.equals("")) && (!AOT.currentDeveloper.username.equals("")) && (AOT.currentAdmin.username.equals(""))) {
+											AOT.currentDeveloper.comment(AOT, a, text);
+										} else if ((AOT.currentUser.username.equals("")) && (AOT.currentDeveloper.username.equals("")) && (!AOT.currentAdmin.username.equals(""))) {
+											AOT.currentAdmin.comment(AOT, a, text);
+										}
 										commentPanel.removeAll();
 										commentPanel.add(commentHeader, BorderLayout.NORTH);
 										commentPanel.add(addComment);
