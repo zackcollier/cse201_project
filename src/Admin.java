@@ -40,11 +40,8 @@ public class Admin extends Moderator {
 	// See user login
 	@Override
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
-		for (Developer d : AOT.developers) {
-			if (d.username.equals(user) && d.password.equals(pword)) {
-				return true;
-			}
-		}
+		if (AOT.admins.containsKey(user) && AOT.admins.get(user).equals(pword)) 
+			return true;
 		return false;
 	}
 }
