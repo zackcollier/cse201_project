@@ -24,7 +24,14 @@ public class Admin extends Moderator {
 	 * @param app The application to be reviewed.
 	 */
 	public void approveRequest(AppOrganizationTool tool, Application app) {
-		tool.apps.add(app);	
+		tool.apps.add(app);
+		try { 
+        	PrintWriter writer = new PrintWriter(new FileWriter("App_data.txt",true));
+        	writer.write(app.name + "," + app.description + "," + app.company + "," + app.platforms + "," + app.version + "," + app.genre + "\n");
+        	writer.close();
+	 } catch(IOException e) {
+			System.out.println("App Database Not Found");
+		}
 	}
 	
 	// See user login
