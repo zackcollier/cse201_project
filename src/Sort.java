@@ -11,7 +11,7 @@ public class Sort {
 	public Sort() {
 		
 		this.sorts = new ArrayList<String>();
-		data = new ArrayList<ArrayList<String>>(AppOrganizationTool.sortFilterData);
+		data = new ArrayList<ArrayList<String>>(AppOrganizationTool.sortGenreFilterData);
 		
 	}
 	/* make the arraylist of the platform sort
