@@ -45,7 +45,7 @@ public class UserTest {
     	// Test User Login
     	assertTrue(user3.login(AOT, user3.username, "passwd"));
     	// Checks the user logged in is the current user 
-    	assertTrue(AOT.currentUser.equals(user3));
+    	assertTrue(AOT.currentUser.username.equals(user3.username) && AOT.currentUser.password.equals(user3.password));
     }
 
     @Test
@@ -56,11 +56,11 @@ public class UserTest {
     	// User Login
     	user4.login(AOT, user4.username, "passwd");
     	// Checks the user logged in is the current user 
-    	assertTrue(AOT.currentUser.equals(user4));
+    	assertTrue(AOT.currentUser.username.equals(user4.username) && AOT.currentUser.password.equals(user4.password));
     	// Test User logout
     	assertTrue(user4.logout(AOT));
     	// Checks that current user is no longer signed in
-    	assertTrue(AOT.currentUser == null);
+    	assertTrue(AOT.currentUser.username.equals("") && AOT.currentUser.password.equals(""));
     }
 
     @Test
@@ -72,12 +72,13 @@ public class UserTest {
         user5.login(AOT, user5.username, "passwd");
         // Checks if user leaves comment
         user5.comment(AOT, APP, "Comment1");
-        assertTrue(APP.comments.containsValue("Comment1"));
+        assertTrue(APP.comments.containsKey(user5.username));
+        assertTrue(APP.comments.get(user5.username).contains("Comment1"));
         // User Logs out
         user5.logout(AOT);
         user5.comment(AOT, APP, "Comment2");
         // Checks to make sure user cannot comment when signed out
-        assertFalse(APP.comments.containsValue("Comment2"));
+        assertFalse(APP.comments.get(user5.username).contains("Comment2"));
     }
 
     @Test
