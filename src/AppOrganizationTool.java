@@ -24,7 +24,7 @@ import javax.swing.border.LineBorder;
 
 public class AppOrganizationTool {
 
-	public static ArrayList<Application> apps = new ArrayList<>();
+	public ArrayList<Application> apps = new ArrayList<>();
 	Map<JButton, Application> resultList = new HashMap<JButton, Application>();
 	public static Queue<Application> requests = new LinkedBlockingQueue<>();
 	Map<String, String> users = new HashMap<>();
