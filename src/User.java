@@ -50,7 +50,6 @@ public class User {
 	 */
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
 		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) {
-			AOT.currentUser = new User(user, pword);
 			return true;
 		}
 		return false;
@@ -74,13 +73,26 @@ public class User {
 	 * @return true if the comment was sucessful, false if not.
 	 */
 	public boolean comment(AppOrganizationTool AOT, Application app, String userComment) {
-		if(AOT.currentUser.username.equals(""))
+		if(AOT.currentUser.username.equals("") && AOT.currentAdmin.username.equals("") && AOT.currentDeveloper.equals(""))
 			return false;
 		ArrayList<String> commentList = new ArrayList<String>();
-		if (app.comments.get(username) != null) 
-			commentList = app.comments.get(username);
-		commentList.add(userComment);
-		app.comments.put(username, commentList);
+		if (app.comments.get(AOT.currentUser.username) != null) { 
+			commentList = app.comments.get(AOT.currentUser.username);
+		} else if (app.comments.get(AOT.currentDeveloper.username) != null) {
+			commentList = app.comments.get(AOT.currentDeveloper.username);
+		} else if (app.comments.get(AOT.currentAdmin.username) != null) {
+			commentList = app.comments.get(AOT.currentAdmin.username);
+		}
+		if (!AOT.currentUser.username.equals("")) {
+			commentList.add(userComment);
+			app.comments.put(AOT.currentUser.username, commentList);
+		} else if (!AOT.currentDeveloper.username.equals("")) {
+			commentList.add(userComment);
+			app.comments.put(AOT.currentDeveloper.username, commentList);
+		} else if (!AOT.currentAdmin.username.equals("")) {
+			commentList.add(userComment);
+			app.comments.put(AOT.currentAdmin.username, commentList);
+		}
 		return true;
 	}
 	
@@ -92,9 +104,7 @@ public class User {
 	 * @return true if the rating was sucessful, false if not.
 	 */
 	public boolean rating(AppOrganizationTool AOT, Application app, float userRating) {
-		if (AOT.currentUser.username.equals(""))
-			return false;
-		if (userRating < 0)
+		if (AOT.currentUser.username.equals("") || userRating < 0)
 			return false;
 		app.allRatings.put(username, userRating);
 		return true;
