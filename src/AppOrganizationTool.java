@@ -24,7 +24,7 @@ import javax.swing.border.LineBorder;
 
 public class AppOrganizationTool {
 
-	ArrayList<Application> apps = new ArrayList<>();
+	public static ArrayList<Application> apps = new ArrayList<>();
 	Map<JButton, Application> resultList = new HashMap<JButton, Application>();
 	public static Queue<Application> requests = new LinkedBlockingQueue<>();
 	Map<String, String> users = new HashMap<>();
@@ -63,8 +63,6 @@ public class AppOrganizationTool {
 		sortGenreFilterData = new ArrayList<ArrayList<String>>(genreData);
 		sortPlatformFilterData = new ArrayList<ArrayList<String>>(platformData);
 		
-        Application app1 = new Application("App 1 Name", "App 1 Description", "App 1 Company", "App 1 Platforms", "App 1 Version", "Education");
-        Application app2 = new Application("App 2 Name", "App 2 Description", "App 2 Company", "App 2 Platforms", "App 2 Version", "App 2 Genre");
         Admin a1 = new Admin("username", "password");
         Developer d1 = new Developer("devName", "devPassword", "App 1 Company");
         AppOrganizationTool AOT = new AppOrganizationTool();
@@ -85,7 +83,7 @@ public class AppOrganizationTool {
         	while(scanner.hasNextLine()) {
         		String line = scanner.nextLine();
         		String appinfo[] = line.split(",");
-        		Application currentApp = new Application(appinfo[0],appinfo[0],appinfo[0],appinfo[0],appinfo[0],appinfo[0]);
+        		Application currentApp = new Application(appinfo[0],appinfo[1],appinfo[2],appinfo[3],appinfo[4],appinfo[5]);
         		AOT.apps.add(currentApp);
         	}
         	scanner.close();
@@ -96,12 +94,6 @@ public class AppOrganizationTool {
         AOT.developers.add(d1);
         User user1 = new User("testName", "testPassword");
         AOT.users.put(user1.username, user1.password);
-        AOT.requests.add(app1);
-        AOT.requests.add(app2);
-        a1.viewRequest(AOT);
-        a1.approveRequest(AOT, AOT.getRequests().remove());
-        a1.viewRequest(AOT);
-        a1.approveRequest(AOT, AOT.getRequests().remove());
 
 		JFrame.setDefaultLookAndFeelDecorated(true);
 
@@ -155,6 +147,7 @@ public class AppOrganizationTool {
 				// create temp user with username and password, attempt to login
 				User u = new User(username, password);
 				Developer d = new Developer(username, password, "");
+				Admin a = new Admin(username, password);
 				// if login is successful, change current user to user, display success message
 				if (u.login(AOT, u.username, u.password)) {
 					currentUser = u;
@@ -378,6 +371,32 @@ public class AppOrganizationTool {
 					statusPanel.add(logoutBttn);
 					frame.setVisible(true);
 					
+				} else if (a.login(AOT, a.username, a.password)) {
+					currentAdmin = a;
+					JLabel success = new JLabel("Login successful!");
+					loginFrame.add(success);
+					statusPanel.removeAll();
+					JLabel status = new JLabel("Currently logged in as " + currentAdmin.username);
+					
+					JButton logoutBttn = new JButton("Logout");
+					JFrame logoutFrame = new JFrame("Logout");
+					logoutFrame.setLayout(new FlowLayout());
+					logoutBttn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							currentAdmin = new Admin("","");
+							JLabel logoutSuccess = new JLabel("Logout successful!");
+							logoutFrame.add(logoutSuccess);
+							logoutFrame.setSize(300, 60);
+							statusPanel.removeAll();
+							frame.setVisible(true);
+							logoutFrame.setVisible(true);
+						}
+					});
+					statusPanel.add(status);
+					statusPanel.add(logoutBttn);
+					frame.setVisible(true);
+					
 				} else {  // if login fails, display fail message
 					JLabel fail = new JLabel("Login failed! Please check your login information.");
 					loginFrame.add(fail);
@@ -517,7 +536,7 @@ public class AppOrganizationTool {
 				for (Map.Entry<JButton,Application> entry : AOT.resultList.entrySet()) {
 					boolean display = false;
 					for (JCheckBox cb : genres.checkBoxes) {
-						if (cb.isSelected() && (entry.getValue().genre == cb.getText())) {
+						if (cb.isSelected() && (entry.getValue().genre.equals(cb.getText()))) {
 							display = true;
 						}
 					}
@@ -549,7 +568,7 @@ public class AppOrganizationTool {
 				for (Map.Entry<JButton, Application> entry : AOT.resultList.entrySet()) {
 					boolean display = false;
 					for (JCheckBox cb : platforms.checkBoxes) {
-						if (cb.isSelected() && (entry.getValue().platforms == cb.getText())) {
+						if (cb.isSelected() && (entry.getValue().platforms.equals(cb.getText()))) {
 							display = true;
 						}
 					}
@@ -590,7 +609,7 @@ public class AppOrganizationTool {
 		jp.add(genres);
 		jp.add(platforms);
 		
-		frame.setSize(880, 400);
+		frame.setSize(1300, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
