@@ -24,6 +24,7 @@ public class AdminTest {
 		Admin admin = new Admin("testAdmin", "test1234");
 		admin.approveRequest(AOT, APP);
 		ArrayList<Application> reference = new ArrayList<Application>();
+		reference.add(APP);
 		assertEquals("Arraylists not equal", AOT.getApps(), reference);
 	}
 }
