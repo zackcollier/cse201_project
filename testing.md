@@ -11,12 +11,9 @@
 | --------- | -------- | --- |
 | AdminTest | testApproveRequest | [x] |
 | ApplicationTest | testCommentSystem | [x] |
-| ApplicationTest | testCalcAvgRating | [ ]* |
-| ApplicationTest | testGetFilter | [ ]* |
-| ApplicationTest | testIsBestFit | [ ]* |
+| ApplicationTest | testCalcAvgRating | [x] |
 | DeveloperTest | testUpdateApp | [x] |
 | DeveloperTest | testSubmitRequest | [x] |
-| GenreFilterTest | testGetFilteredGenres | [ ]* |
 | ModeratorTest | testRemoveComments | [x] |
 | UserTest | testSignUp | [x] |
 | UserTest | testLogin | [x] |
