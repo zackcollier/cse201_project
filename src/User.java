@@ -49,8 +49,10 @@ public class User {
 	 * @return true if the login was sucessful, false if not.
 	 */
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
-		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) 
+		if (AOT.users.containsKey(user) && AOT.users.get(user).equals(pword)) {
+			AOT.currentUser = new User(user, pword);
 			return true;
+		}
 		return false;
 	}
 	
