@@ -55,9 +55,9 @@
 - Comment on the approved app
 
 ## Black Box Tests
-- Can a user create an account and then login later? [ ]
+- Can a user create an account and then login later? [x]
 - Can a developer submit a new app and see it on the application once approved? [ ]
-- Can a user both leave and read comments on applications? [ ]
+- Can a user both leave and read comments on applications? [x]
 - Can users input text without there being formatting issues? (What happens if there is a \\n?) [x]
 
 ## Grey Box Tests
@@ -66,6 +66,6 @@
 - Does an app update change the proper files? [ ]
 
 ## White Box Tests
-- Are negative rating handeled? [ ]
+- Are negative rating handeled? [x]
 - Are empty app submissions rejected? [ ]
 - Can a user rate an app only a single time? [ ]
