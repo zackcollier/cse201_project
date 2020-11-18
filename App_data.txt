@@ -1,2 +1,2 @@
-App 1 Name,App 1 Description,App 1 Company,App 1 Platforms,App 1 Version,Education
-App 2 Name,App 2 Description,App 2 Company,App 2 Platforms,App 2 Version,App 2 Genre
+App 1 Name,App 1 Description,App 1 Company,iOS,App 1 Version,Education
+App 2 Name,App 2 Description,App 2 Company,Android,App 2 Version,Games
