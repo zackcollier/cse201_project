@@ -62,7 +62,7 @@
 
 ## Grey Box Tests
 - Do files get updated when an applciation is accepted? [ ]
-- Can only admins see unapproved applications? [ ]
+- Can only admins see unapproved applications? [x]
 - Does an app update change the proper files? [ ]
 
 ## White Box Tests
