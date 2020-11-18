@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Admin extends Moderator {
 
@@ -15,7 +18,7 @@ public class Admin extends Moderator {
 	 * @param tool The instance of tool 
 	 */
 	public Application viewRequest(AppOrganizationTool tool) {
-		return tool.requests.pop();
+		return tool.requests.peek();
 	}
 	
 	/**
