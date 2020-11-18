@@ -1,3 +1,4 @@
+import java.util.Map;
 
 public class Moderator extends User {
 
@@ -22,11 +23,8 @@ public class Moderator extends User {
 	// See user login
 	@Override
 	public boolean login(AppOrganizationTool AOT, String user, String pword) {
-		for (Developer m : AOT.moderators) {
-			if (m.username.equals(user) && m.password.equals(pword)) {
-				return true;
-			}
-		}
+		if (AOT.moderators.containsKey(user) && AOT.moderators.get(user).equals(pword)) 
+			return true;
 		return false;
 	}
 }
