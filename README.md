@@ -47,6 +47,5 @@ Make sure that Ant is properly installed and both your JAVA_HOME and ANT_HOME en
 - App information stored in App_data.txt
 ### AppOrganizationTool
 - Where the app instance is run
-- Holds and retrieves from files the user and app data
-- 
+- Holds and retrieves data from files about users and apps
 ## [Testing](testing.md)
