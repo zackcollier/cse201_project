@@ -49,17 +49,4 @@ Make sure that Ant is properly installed and both your JAVA_HOME and ANT_HOME en
 - Where the app instance is run
 - Holds and retrieves from files the user and app data
 - 
-## [Goals for Iteration 1](#Iter1)
-- [x] Search Apps
-- [x] View Applications
-- [x] Implement Basic Classes
-- [x] Sort Apps
-- [x] 2 Classes Fully Tested
-## [Goals for Iteration 2](#Iter2)
-- [ ] Filter Apps
-- [ ] Testing for classes that are not yet implemented
-- [ ] Implemented Login System and Storage
-- [ ] Comments
-- [ ] Initial Pass for GUI
-- [ ] Updating Apps
-## [Goals for Iteration 3](#Iter3)
+## [Testing](testing.md)
