@@ -31,7 +31,7 @@ public class AppOrganizationTool {
 	Map<String, String> admins = new HashMap<>();
 	Map<String, String> moderators = new HashMap<>();
 	public static ArrayList<Developer> developers = new ArrayList<Developer>();
-	static User currentUser = new User("","");
+	public User currentUser = new User("","");
 	static Admin currentAdmin = new Admin("","");
 	static Developer currentDeveloper = new Developer("","","");
 	public static ArrayList<Application> sortedApps = new ArrayList<Application>();
@@ -150,18 +150,18 @@ public class AppOrganizationTool {
 				Admin a = new Admin(username, password);
 				// if login is successful, change current user to user, display success message
 				if (u.login(AOT, u.username, u.password)) {
-					currentUser = u;
+//					AOT.currentUser = u
 					JLabel success = new JLabel("Login successful!");
 					loginFrame.add(success);
 					statusPanel.removeAll();
-					JLabel status = new JLabel("Currently logged in as " + currentUser.username);
+					JLabel status = new JLabel("Currently logged in as " + AOT.currentUser.username);
 					JButton logoutBttn = new JButton("Logout");
 					JFrame logoutFrame = new JFrame("Logout");
 					logoutFrame.setLayout(new FlowLayout());
 					logoutBttn.addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							currentUser = new User("","");
+							AOT.currentUser = new User("","");
 							JLabel logoutSuccess = new JLabel("Logout successful!");
 							logoutFrame.add(logoutSuccess);
 							logoutFrame.setSize(300, 60);
@@ -419,13 +419,13 @@ public class AppOrganizationTool {
 				frame.setVisible(true);
 				// clear list of results
 				AOT.resultList.clear();
-				if (currentUser.search(AOT, text).size() == 0) {
+				if (AOT.currentUser.search(AOT, text).size() == 0) {
 					JLabel noResults = new JLabel("No results found!");
 					resultsPanel.add(noResults, BorderLayout.SOUTH);
 					frame.setVisible(true);
 				}
 				// loop through applications in search results
-				for (Application a : currentUser.search(AOT, text)) {
+				for (Application a : AOT.currentUser.search(AOT, text)) {
 					// create a button for each search result with name, company, and rating
 					JButton result = new JButton("<html>" + a.name + "<br/>" + a.company + "<br/>" + a.averageRating);
 					result.setBorder(new LineBorder(Color.BLACK));
@@ -459,7 +459,7 @@ public class AppOrganizationTool {
 							submitComment.addActionListener(new ActionListener() {
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									if (currentUser.username.equals("")) {
+									if (AOT.currentUser.username.equals("")) {
 										JFrame fail = new JFrame("Comment failed");
 										JLabel commentFail = new JLabel("Failed to add comment! Please login.");
 										fail.add(commentFail);
@@ -470,7 +470,7 @@ public class AppOrganizationTool {
 										JLabel commentSuccess = new JLabel("Comment added successfully!");
 										success.add(commentSuccess);
 										String text = commentBar.getText();
-										currentUser.comment(AOT, a, text);
+										AOT.currentUser.comment(AOT, a, text);
 										commentPanel.removeAll();
 										commentPanel.add(commentHeader, BorderLayout.NORTH);
 										commentPanel.add(addComment);
