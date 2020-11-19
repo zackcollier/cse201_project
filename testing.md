@@ -29,10 +29,9 @@
 - A developer submits and app
 - An admin approves the developer's submit request
 - The developer updates the app
-2. Comment and Rate [ ]
+2. Comment [x]
 - A user comments on an app
-- The user rates an app
-- The user can see the comment and the rating of the app changes
+- The user can see the comments of the app
 
 ## System Tests
 1. User Case [x]
