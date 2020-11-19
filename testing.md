@@ -44,10 +44,6 @@
 - Login
 - Submit app
 - Update app once app is approved
-3. Moderator Case [x]
-- Login 
-- Filter apps
-- remove comments on an app
 4. Admin Case [x]
 - Login
 - Approve App
