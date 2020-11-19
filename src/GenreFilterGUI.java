@@ -31,14 +31,15 @@ public class GenreFilterGUI extends JPanel implements ItemListener, ActionListen
 		this.buttons = new JPanel();
 		buttons.setLayout(new FlowLayout());
 		
-		//add these 9 genres to the availableGnres arraylist of the genres
-		this.availableGenres = new ArrayList<String>(Arrays.asList("Education","Chat","Game","Photo","Music","Shopping","News","Weather","Book"));
+		//add these 7 genres to the availableGnres arraylist of the genres
+		this.availableGenres = new ArrayList<String>(Arrays.asList("Education","Chat","Game","Photo","Music","Shopping","News"));
+		//this.availableGenres = new ArrayList<String>(Arrays.asList("Education","Chat","Game","Photo","Music","Shopping","News","Weather","Book"));
 		
 		this.activeGenres = new ArrayList<String>();
 		
 		checkBoxes = new ArrayList<JCheckBox>();
 		
-		// add these 9 genres to the JCheckBox
+		// add these 7 genres to the JCheckBox
 		JCheckBox Education = new JCheckBox("Education", false);
 		JCheckBox Chat = new JCheckBox("Chat", false);
 		JCheckBox Games = new JCheckBox("Game", false);
@@ -46,10 +47,10 @@ public class GenreFilterGUI extends JPanel implements ItemListener, ActionListen
 		JCheckBox Music = new JCheckBox("Music", false);
 		JCheckBox Shopping = new JCheckBox("Shopping", false);
 		JCheckBox News = new JCheckBox("News", false);
-		JCheckBox Weather = new JCheckBox("Weather",false);
-		JcheckBox Book = new JCheckBox("Book",false);
+		//JCheckBox Weather = new JCheckBox("Weather",false);
+		//JcheckBox Book = new JCheckBox("Book",false);
 		
-		// add these nine genres to the checkBoxes
+		// add these 7 genres to the checkBoxes
 		checkBoxes.add(Education);
 		checkBoxes.add(Chat);
 		checkBoxes.add(Game);
@@ -57,8 +58,8 @@ public class GenreFilterGUI extends JPanel implements ItemListener, ActionListen
 		checkBoxes.add(Music);
 		checkBoxes.add(Shopping);
 		checkBoxes.add(News);
-		checkBoxes.add(Weather);
-		checkBoxes.add(Book);
+		//checkBoxes.add(Weather);
+                //checkBoxes.add(Book);
 	 
 		// using for each method in arraylist to add addItemListener to the checkBoxList
 		for (JCheckBox c: checkBoxes) {
@@ -75,7 +76,7 @@ public class GenreFilterGUI extends JPanel implements ItemListener, ActionListen
 		// add the two JButtons
 		buttons.add(filterButton);
 		buttons.add(cancelButton);
-		// Add the filterLabel, 9 genres of the checkBoxList, and the two buttons to the GUI
+		// Add the filterLabel, 7 genres of the checkBoxList, and the two buttons to the GUI
 		this.add(filterLabel, BorderLayout.NORTH);
 		this.add(checkBoxList, BorderLayout.CENTER);
 		this.add(buttons, BorderLayout.SOUTH);
