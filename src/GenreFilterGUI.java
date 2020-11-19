@@ -32,7 +32,7 @@ public class GenreFilterGUI extends JPanel implements ItemListener, ActionListen
 		buttons.setLayout(new FlowLayout());
 		
 		//add these 7 genres to the availableGnres arraylist of the genres
-		this.availableGenres = new ArrayList<String>(Arrays.asList("Education","Chat","Game","Photo","Music","Shopping","News"));
+		this.availableGenres = new ArrayList<String>(Arrays.asList("Education","Chat","Games","Photo","Music","Shopping","News"));
 		//this.availableGenres = new ArrayList<String>(Arrays.asList("Education","Chat","Game","Photo","Music","Shopping","News","Weather","Book"));
 		
 		this.activeGenres = new ArrayList<String>();
@@ -42,7 +42,7 @@ public class GenreFilterGUI extends JPanel implements ItemListener, ActionListen
 		// add these 7 genres to the JCheckBox
 		JCheckBox Education = new JCheckBox("Education", false);
 		JCheckBox Chat = new JCheckBox("Chat", false);
-		JCheckBox Games = new JCheckBox("Game", false);
+		JCheckBox Games = new JCheckBox("Games", false);
 		JCheckBox Photo = new JCheckBox("Photo", false);
 		JCheckBox Music = new JCheckBox("Music", false);
 		JCheckBox Shopping = new JCheckBox("Shopping", false);
@@ -53,7 +53,7 @@ public class GenreFilterGUI extends JPanel implements ItemListener, ActionListen
 		// add these 7 genres to the checkBoxes
 		checkBoxes.add(Education);
 		checkBoxes.add(Chat);
-		checkBoxes.add(Game);
+		checkBoxes.add(Games);
 		checkBoxes.add(Photo);
 		checkBoxes.add(Music);
 		checkBoxes.add(Shopping);
